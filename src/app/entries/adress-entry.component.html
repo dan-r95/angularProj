@@ -1,0 +1,28 @@
+<div class="row">
+  <div class=' col-md-offset-4 col-md-4' style='text-align: center'>
+
+    <form class="example-form">
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' />
+      </mat-form-field>
+    </form>
+
+    <h3> Alle entries</h3>
+    <ul><li *ngFor="let entry of entries | searchFilter:searchBar">
+      <div>
+        {{entry.id}}
+        {{entry.name}}
+      </div>
+    </li>
+  </ul>
+
+  <button mat-fab color="primary">+</button>
+
+  <mat-paginator [length]="100"
+  [pageSize]="10"
+  [pageSizeOptions]="[5, 10, 25, 100]">
+</mat-paginator>
+</div>
+</div>
+<!-- snackbar on creation-->
+<!--add entry -->

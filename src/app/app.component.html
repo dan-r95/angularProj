@@ -3,29 +3,66 @@
   <h1>
     Welcome to {{title}}!
   </h1>
-</div>
-<!-- <h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul> -->
+
+<!-- <img [src]="source" /> -->
+
+
+<nav>
+  <a routerLink="/heroes">Heroes</a>
+</nav>
+
 <div class='row'>
   <div class=' col-md-offset-4 col-md-4' style='text-align: center'>
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Browse" value="">
+        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' />
       </mat-form-field>
     </form>
   </div>
 </div>
 
+<router-outlet></router-outlet>
+</div>
+<!-- <h2>Here are some links to help you start: </h2>
+<ul>
+<li>
+<h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
+</li>
+<li>
+<h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
+</li>
+<li>
+<h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
+</li>
+</ul> -->
+
+
+<h4 [hidden]="!favoriteHero">Ich habe eingetragen: {{favoriteHero}}</h4>
+
 <button class="btn btn-primary">Test Button</button> <br />
 <i class="fa fa-check"></i> <br />
 <button mat-raised-button color="primary">Primary</button>
+
+
+<tr *ngFor="let movie of movies  | slice:0:2">
+  <td>{{movie.title}}</td>
+</tr>
+
+
+<button (click)="toggleImage()">
+
+
+
+  <mat-form-field class="example-full-width">
+    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+
+
+<!-- no orderby or custom filters allowed, define in component -->
+
+<!-- You write Angular applications by composing HTML templates with Angularized markup,
+writing component classes to manage those templates, adding application logic in services,
+and boxing components and services in modules.  -->
