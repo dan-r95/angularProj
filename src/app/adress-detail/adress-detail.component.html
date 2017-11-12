@@ -1,0 +1,35 @@
+<div class="row">
+  <div class=' col-md-offset-4 col-md-4' style='text-align: center'>
+
+    <div *ngIf="entry" class="adressBox">
+      <h4>Details für {{ entry.forename +' '+ entry.name  }} </h4>
+      <div class="adressProps row">
+        <span>id: </span>{{entry.id}}
+        <span *ngIf="entry.mobile">Mobil: </span>{{entry.mobile}}
+        <span *ngIf="entry.work">Arbeit: </span>{{entry.work}}
+        <span *ngIf="entry.adress">id: </span>{{entry.adress}}
+        <span *ngIf="entry.zip">id: </span>{{entry.zip}}
+        <span *ngIf="entry.email">id: </span>{{entry.email}}
+      </div>
+      <!-- <mat-icon svgIcon="edit"></mat-icon> -->
+      <!-- <mat-icon>edit</mat-icon>
+      <mat-icon>delete</mat-icon> -->
+      <div class="row">
+            <button mat-icon-button color="primary"><mat-icon>edit</mat-icon></button>
+            <button mat-mini-fab color="primary"><mat-icon>delete</mat-icon></button>
+      </div>
+      <!-- <mat-icon>edit</mat-icon>
+      <button mat-icon-button color="primary">edit
+      <mat-icon svgIcon="edit"></mat-icon>
+    </button>
+    <button mat-icon-button color="primary">
+    <mat-icon svgIcon="delete"></mat-icon>
+  </button>
+  <mat-icon svgIcon="ic_mode_edit_black_24px"></mat-icon> -->
+
+</div></div>
+<div class="col-md-1">
+  <button mat-button color="primary" (click)="goBack()">Zurück</button>
+</div>
+
+</div>

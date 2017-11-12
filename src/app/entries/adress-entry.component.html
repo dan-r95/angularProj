@@ -7,20 +7,36 @@
       </mat-form-field>
     </form>
 
-    <h3> Alle entries</h3>
-    <ul><li *ngFor="let entry of entries | searchFilter:searchBar">
-      <div>
-        {{entry.id}}
-        {{entry.name}}
+    <h3> Alle Einträge</h3>
+    <div class="row">
+      <div class="col-md-6 adressBox" *ngFor="let entry of entries | searchFilter:searchBar"
+      routerLink="/adressDetail/{{entry.id}}">
+      {{entry.id}}
+      {{entry.name}}
+      <div class="row">
+        <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
+        <button mat-mini-fab color="primary">  <mat-icon>delete</mat-icon></button>
       </div>
-    </li>
-  </ul>
 
-  <button mat-fab color="primary">+</button>
 
-  <mat-paginator [length]="100"
-  [pageSize]="10"
-  [pageSizeOptions]="[5, 10, 25, 100]">
+      <!-- <md-icon md-font-icon="android" alt="android"></md-icon>
+      <md-icon md-font-library="material-icons">face</md-icon>
+      <mat-icon svgIcon="home"></mat-icon>
+      <mat-icon>home</mat-icon>
+      <button mat-icon-button color="primary">
+      <mat-icon svgIcon="mode-edit"></mat-icon>
+    </button>
+    <button mat-icon-button color="primary">
+    <mat-icon svgIcon="delete"></mat-icon>
+  </button> -->
+</div>
+</div>
+
+<button mat-mini-fab color="primary" (click)="openDialog()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon></button>
+
+<mat-paginator [length]="100"
+[pageSize]="10"
+[pageSizeOptions]="[5, 10, 25, 100]">
 </mat-paginator>
 </div>
 </div>
