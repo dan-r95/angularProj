@@ -10,6 +10,7 @@ import {MatIconRegistry} from '@angular/material';
 })
 export class AppComponent {
   title = 'Adress Book';
+  angularDocsUrl = "https://github.com/rossy95/angularProj"
 //   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
 //         iconRegistry.addSvgIconSetInNamespace( "add", sanitizer.
 //         bypassSecurityTrustResourceUrl("assets/svg/ic_add_black_24px.svg"));

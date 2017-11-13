@@ -1,15 +1,30 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
+  <!-- <img [src]="source" /> -->
+
+  <mat-toolbar color="primary">
+    <!-- <span>Custom Toolbar</span> -->
+    <!-- <span>Second Line</span> -->
+      <span><nav>
+      <a routerLink="/heroes"><mat-icon class="header-link">home</mat-icon></a>
+    </nav></span>
+    <span class="example-spacer"></span>
+    <!-- <mat-icon class="example-icon">verified_user</mat-icon> -->
+    <span> <a class="header-link" [href]="angularDocsUrl">Github</a> </span>
+    <!-- <mat-toolbar-row> -->
+
+    <!-- </mat-toolbar-row>
+
+    <mat-toolbar-row>
+      <span>Third Line</span>
+      <span class="example-spacer"></span>
+      <mat-icon class="example-icon">favorite</mat-icon>
+      <mat-icon class="example-icon">delete</mat-icon>
+    </mat-toolbar-row> -->
+  </mat-toolbar>
   <h1>
     Welcome to {{title}}!
   </h1>
-
-  <!-- <img [src]="source" /> -->
-
-
-  <nav>
-    <a routerLink="/heroes">Alle Adressen</a>
-  </nav>
 
   <router-outlet></router-outlet>
 </div>
@@ -27,7 +42,7 @@
 </ul> -->
 
 
-<h4 [hidden]="!favoriteHero">Ich habe eingetragen: {{favoriteHero}}</h4>
+<!-- <h4 [hidden]="!favoriteHero">Ich habe eingetragen: {{favoriteHero}}</h4>
 
 <button class="btn btn-primary">Test Button</button> <br />
 <i class="fa fa-check"></i> <br />
@@ -47,7 +62,7 @@
     <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+  </mat-form-field> -->
 
 
 

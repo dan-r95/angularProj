@@ -1,5 +1,5 @@
 <p>
-  dialog works! Wow!
+Neuen Kontakt hinzufügen
 </p>
 
 
@@ -30,4 +30,19 @@
       Email is <strong>required</strong>
     </mat-error>
   </mat-form-field>
+  <p>
+      <mat-form-field class="example-full-width">
+        <textarea matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+      </mat-form-field>
+    </p>
+  <table class="example-full-width" cellspacing="0"><tr>
+      <td><mat-form-field class="example-full-width">
+        <input matInput placeholder="Stadt">
+      </mat-form-field></td>
+      <td><mat-form-field class="example-full-width">
+        <input matInput #postalCode maxlength="5" placeholder="PLZ" value="12345">
+        <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+      </mat-form-field></td>
+    </tr></table>
 </form>
+<button style="float:right" mat-button color="primary" (click)="addEntry()">Hinzufügen</button>

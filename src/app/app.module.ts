@@ -12,7 +12,7 @@ import { DialogComponent }  from './dialog/dialog.component';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatButtonModule, MatCheckboxModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
-  MatPaginatorModule, MatIconModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule} from '@angular/material';
+  MatPaginatorModule, MatIconModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule, MatCardModule, MatToolbarModule} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -29,7 +29,7 @@ import { HttpModule } from '@angular/http';
     imports: [
       BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
       BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
-      AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule
+      AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatCardModule, MatToolbarModule
     ],  //MatDialog MatDialogRef
     providers: [AdressManagementService, MessageService],
     bootstrap: [AppComponent],
