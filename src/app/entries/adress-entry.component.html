@@ -9,11 +9,13 @@
     <div class="row">
       <div class="col-md-6 adressBox" *ngFor="let entry of entries | searchFilter:searchBar"
       routerLink="/adressDetail/{{entry.id}}">
+<!-- | slice:0:2 -->
       {{entry.id}}
       {{entry.name}}
+<!-- pageIndex*pageSize:pageIndex+1*pageSize  -->
       <div class="row">
-        <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
-        <button mat-mini-fab color="primary">  <mat-icon>delete</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon (click)="edit(entry)">edit</mat-icon></button>
+        <button mat-mini-fab color="primary">  <mat-icon (click)="delete(entry)">delete</mat-icon></button>
       </div>
 
 
@@ -29,10 +31,21 @@
   </button> -->
     </div>
 </div>
-<mat-paginator [length]="100"
-[pageSize]="10"
-[pageSizeOptions]="[5, 10, 25, 100]">
+<mat-paginator *ngIf="entries" [length]="entries.length"
+[pageSize]="8"
+[pageSizeOptions]="[5, 10, 25, 50]">
 </mat-paginator>
+<div>
+
+<!-- {{pageEvent.pageIndex}}
+{{pageIndex}} -->
+<div *ngIf="pageEvent">
+{{pageEvent.pageIndex}}
+{{pageEvent.pageSize}}
+{{pageEvent.length}}
+</div>
+</div>
+
 <button mat-mini-fab color="primary" (click)="openDialog()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon></button>
 
 

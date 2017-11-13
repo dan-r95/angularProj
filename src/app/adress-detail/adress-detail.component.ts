@@ -33,4 +33,12 @@ export class AdressDetailComponent implements OnInit {
        this.location.back();
      }
 
+     save(): void {
+        this.adressService.updateHero(this.entry)
+          .subscribe(() => this.goBack());
+      }
+
+
+
+
   }

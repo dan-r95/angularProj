@@ -33,5 +33,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 
 
-# Dependecies
-The project uses npm as the packet manager. Run `npm install` in the current working directory to install all required dependecies. 
+## Dependecies
+Angular Version 4.4, hence only typescript 2.3.4 is supported. See all package versions in:
+```
+adressBook
+│   README.md
+│   package.json  
+```
+The project uses npm as the packet manager. Run `npm install` in the current working directory to install all required dependecies.

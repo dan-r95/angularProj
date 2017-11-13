@@ -18,6 +18,9 @@ import {ErrorStateMatcher} from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { MockDataService }  from './mock-data.service';
 
 
 
@@ -29,7 +32,10 @@ import { HttpModule } from '@angular/http';
     imports: [
       BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
       BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
-      AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatCardModule, MatToolbarModule
+      AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
+      MatCardModule, MatToolbarModule, HttpClientModule,
+      HttpClientInMemoryWebApiModule.forRoot(MockDataService, { dataEncapsulation: false }
+)
     ],  //MatDialog MatDialogRef
     providers: [AdressManagementService, MessageService],
     bootstrap: [AppComponent],
