@@ -15,30 +15,30 @@ export class AdressDetailComponent implements OnInit {
   entry: Entry;
   // @Input() entry: Entry;
 
-  constructor( private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private adressService: AdressManagementService,
     private location: Location) { }
 
-    ngOnInit(): void {
-      this.getHero();
-    }
-
-    getHero(): void {
-      const id = +this.route.snapshot.paramMap.get('id');
-      this.adressService.getHero(id)
-      .subscribe(entry => this.entry = entry);
-    }
-
-    goBack(): void {
-       this.location.back();
-     }
-
-     save(): void {
-        this.adressService.updateHero(this.entry)
-          .subscribe(() => this.goBack());
-      }
-
-
-
-
+  ngOnInit(): void {
+    this.getHero();
   }
+
+  getHero(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.adressService.getHero(id)
+      .subscribe(entry => this.entry = entry);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  save(): void {
+    this.adressService.updateHero(this.entry)
+      .subscribe(() => this.goBack());
+  }
+
+
+
+
+}
