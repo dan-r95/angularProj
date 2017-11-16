@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -25,13 +25,13 @@ export class DialogComponent implements OnInit {
   email: string;
   name: string;
   forename: string;
-  adress: string;
-  work: string;
-  mobile: string;
+  adress?: string;
+  work?: string;
+  mobile?: string;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar, private cdr: ChangeDetectorRef) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -47,10 +47,10 @@ export class DialogComponent implements OnInit {
   }
 
   addEntry(): void {
-    if (this.email && this.name && this.forename) {
-      this.entry.email = this.email;
-      this.entry.name = this.name;
-      this.entry.forename = this.forename;
+    if (this.entry.email && this.entry.name && this.entry.forename) {
+      // this.entry.email = this.email;
+      // this.entry.name = this.name;
+      // this.entry.forename = this.forename;
       this.dialogRef.close(this.entry);
     }
     else {
@@ -76,7 +76,21 @@ export class DialogComponent implements OnInit {
 
 
   ngOnInit() {
-    this.entry = new Entry();
-  }
 
+    // }
+    // ngAfterViewInit() {
+    console.log(this.data);
+    if (this.data && this.data.entry) {
+      // this.entry = new Entry();
+      this.entry = this.data.entry;
+      console.log(this.entry)
+      // this.cdr.markForCheck();
+      // this.cdr.detectChanges();
+    } else {
+      this.entry = new Entry();
+      // }
+
+    }
+
+  }
 }

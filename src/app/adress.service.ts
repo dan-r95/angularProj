@@ -21,20 +21,20 @@ export class AdressManagementService {
 
   constructor(private http: HttpClient) { }
 
-  getHeroes(event?: PageEvent): Observable<Entry[]> { //
+  getEntries(event?: PageEvent): Observable<Entry[]> { //
     console.log(event);
     // Todo: send the message _after_ fetching the heroes
     // this.messageService.add('HeroService: fetched heroes');
     return this.http.get<Entry[]>(this.adressesUrl).pipe(
-      catchError(this.handleError('getHeroes', []))
+      catchError(this.handleError('getEntries', []))
     );
   }
 
-  getHero(id: number): Observable<Entry> {
+  getEntry(id: number): Observable<Entry> {
     const url = `${this.adressesUrl}/${id}`;
     // this.messageService.add(`HeroService: fetched hero id=${id}`);
     return this.http.get<Entry>(url).pipe(
-      catchError(this.handleError<Entry>(`getHero id=${id}`))
+      catchError(this.handleError<Entry>(`getEntry id=${id}`))
     );
   }
 
@@ -53,26 +53,26 @@ export class AdressManagementService {
   }
 
   /** PUT: update the hero on the server */
-  updateHero(entry: Entry): Observable<any> {
+  updateEntry(entry: Entry): Observable<any> {
     return this.http.put(this.adressesUrl, entry, httpOptions).pipe(
-      catchError(this.handleError<any>('updateHero'))
+      catchError(this.handleError<any>('updateEntry'))
     );
   }
 
   /** POST: add a new hero to the server */
-  addHero(entry: Entry): Observable<Entry> {
+  addEntry(entry: Entry): Observable<Entry> {
     return this.http.post<Entry>(this.adressesUrl, entry, httpOptions).pipe(
-      catchError(this.handleError<Entry>('addHero'))
+      catchError(this.handleError<Entry>('addEntry'))
     );
   }
 
   /** DELETE: delete the hero from the server */
-  deleteHero(entry: Entry | number): Observable<Entry> {
+  deleteEntry(entry: Entry | number): Observable<Entry> {
     const id = typeof entry === 'number' ? entry : entry.id;
     const url = `${this.adressesUrl}/${id}`;
 
     return this.http.delete<Entry>(url, httpOptions).pipe(
-      catchError(this.handleError<Entry>('deleteHero'))
+      catchError(this.handleError<Entry>('deleteEntry'))
     );
   }
 

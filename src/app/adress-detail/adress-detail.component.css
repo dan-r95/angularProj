@@ -13,11 +13,18 @@
 }
 
 .example-card {
-  width: 400px;
+  width: 450px;
 }
 
 .header-image {
-  /*background-image: url('http://material.angular.io/assets/img/examples/shiba1.jpg');
-  background-size: cover;*/
-  font-size: 30px;
+  font-size: 36px;
+}
+
+.example-header-image {
+  background-image: url('../../assets/default_pic.jpg');
+  background-size: cover;
+  width: 60px;
+  height: 60px;
+  float: right;
+  border-radius: 50%;
 }

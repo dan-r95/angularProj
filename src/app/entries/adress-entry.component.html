@@ -8,17 +8,25 @@
     </form>
     <div class="row">
       <div class="col-md-6 col-xs-6 col-sm-6 adressBox" *ngFor="let entry of entries | searchFilter:searchBar |slice:pageIndex*pageSize:(pageIndex+1)*pageSize">
-      <!-- | slice:0:2 -->
-      {{entry.id}}
-      <a routerLink="/adressDetail/{{entry.id}}">{{entry.name}}</a>
-      <!-- pageIndex*pageSize:pageIndex+1*pageSize  -->
-      <div class="row">
-        <button mat-mini-fab color="primary"><mat-icon (click)="edit(entry)">edit</mat-icon></button>
-        <button mat-mini-fab color="primary">  <mat-icon (click)="openConfirmDialog(entry)">delete</mat-icon></button>
-      </div>
+        <!-- | slice:0:2 -->
+        <div class="topDiv" routerLink="/adressDetail/{{entry.id}}">
+          <h5>{{entry.forename | slice:0:8}} {{entry.forename.length > 8 ? '...':''}} </h5>
+          <h4>{{entry.name |  slice:0:8 }} {{entry.name.length > 8 ? '...':''}} </h4>
+          <div *ngIf="entry.mobile">
+            <mat-icon>smartphone</mat-icon> {{entry.mobile}}
+          </div>
+          <!-- pageIndex*pageSize:pageIndex+1*pageSize  -->
+        </div>
+
+        <div class="downDiv" class="action-buttons">
+          <!-- <mat-card-actions> -->
+          <button mat-mini-fab color="primary"><mat-icon (click)="editEntry(entry)">edit</mat-icon></button>
+          <button mat-mini-fab color="primary">  <mat-icon (click)="openConfirmDialog(entry)">delete</mat-icon></button>
+          <!-- </mat-card-actions> -->
+        </div>
 
 
-      <!-- <md-icon md-font-icon="android" alt="android"></md-icon>
+        <!-- <md-icon md-font-icon="android" alt="android"></md-icon>
       <md-icon md-font-library="material-icons">face</md-icon>
       <mat-icon svgIcon="home"></mat-icon>
       <mat-icon>home</mat-icon>
@@ -28,25 +36,21 @@
     <button mat-icon-button color="primary">
     <mat-icon svgIcon="delete"></mat-icon>
   </button> -->
-</div>
-</div>
-<div *ngIf="pageEvent">
-  <h5>Page Change Event Properties</h5>
-  <div>List length: {{pageEvent.length}}</div>
-  <div>Page size: {{pageEvent.pageSize}}</div>
-  <div>Page index: {{pageEvent.pageIndex}}</div>
-</div>
-<mat-paginator *ngIf="entries" [length]="length"
-[pageSize]="5"
-[pageIndex]="0"
-[pageSizeOptions]="[5, 10, 25, 50]"
-(page)="pageEvent = getHeroes($event)">
-</mat-paginator>
-<div>
-  <button mat-mini-fab color="primary" (click)="openDialog()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon></button>
+      </div>
+    </div>
+    <div *ngIf="pageEvent">
+      <h5>Page Change Event Properties</h5>
+      <div>List length: {{pageEvent.length}}</div>
+      <div>Page size: {{pageEvent.pageSize}}</div>
+      <div>Page index: {{pageEvent.pageIndex}}</div>
+    </div>
+    <mat-paginator *ngIf="entries" [length]="length" [pageSize]="5" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 50]" (page)="pageEvent = getAllEntries($event)">
+    </mat-paginator>
+    <div>
+      <button mat-mini-fab color="primary" (click)="openDialog()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon></button>
 
 
-</div>
-</div>
-<!-- snackbar on creation-->
-<!--add entry -->
+    </div>
+  </div>
+  <!-- snackbar on creation-->
+  <!--add entry -->

@@ -14,36 +14,43 @@
 
   <form class="example-form">
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Vorname" [formControl]="emailFormControl" [(ngModel)]="forename" name="forename" required>
+      <input matInput placeholder="Vorname" [(ngModel)]="entry.forename" name="forename" required>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Nachname" [formControl]="emailFormControl" [(ngModel)]="name" name="name" required>
+      <input matInput placeholder="Nachname" [(ngModel)]="entry.name" name="name" required>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email" name="email" [errorStateMatcher]="matcher">
-      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-icon matSuffix>smartphone</mat-icon>
+      <input matInput placeholder="Mobil" [(ngModel)]="entry.mobile" name="mobile" type="number">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-icon matSuffix>phone</mat-icon>
+      <input matInput placeholder="Arbeit" [(ngModel)]="entry.work" name="work" type="number">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="entry.email" name="email" [errorStateMatcher]="matcher">
       <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-        Please enter a valid email address
+        Bitte gültige Email Adresse angeben
       </mat-error>
       <mat-error *ngIf="emailFormControl.hasError('required')">
-        Email is <strong>required</strong>
+        Email ist <strong>gefordert</strong>
       </mat-error>
     </mat-form-field>
     <p>
       <mat-form-field class="example-full-width">
-        <textarea [(ngModel)]="adress" name="adress" matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+        <textarea [(ngModel)]="entry.adress" name="adress" matInput placeholder="Address">1600 Amphitheatre Pkwy</textarea>
       </mat-form-field>
     </p>
     <table class="example-full-width" cellspacing="0">
       <tr>
         <td>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Stadt">
+            <input matInput placeholder="Stadt" [(ngModel)]="entry.town" name="town">
           </mat-form-field>
         </td>
         <td>
           <mat-form-field class="example-full-width">
-            <input matInput #postalCode maxlength="5" placeholder="PLZ" value="12345">
+            <input matInput #postalCode maxlength="5"  [(ngModel)]="entry.zip" placeholder="PLZ" name="plz" type="number">
             <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
           </mat-form-field>
         </td>

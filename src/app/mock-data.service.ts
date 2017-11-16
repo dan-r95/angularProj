@@ -12,7 +12,7 @@ export class MockDataService {
 
   createDb() {
     const entries = [
-      { id: 11, name: 'Mr. Nice', forename: 'Dan' },
+      { id: 11, name: 'Mr. Nice', forename: 'Danielowitsch the Second', mobile: "017654323921", email: "test@test.com", zip: "01217", town: "dresden" },
       { id: 12, name: 'Narco', forename: 'Dan' },
       { id: 13, name: 'Bombasto', forename: 'Dan' },
       { id: 14, name: 'Celeritas', forename: 'Dan' },

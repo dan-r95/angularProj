@@ -4,7 +4,7 @@ import { AdressManagementService } from '../adress.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'selector',
@@ -21,15 +21,15 @@ export class adressEntriesComponent implements OnInit {
   pageSize = 4;
   pageSizeOptions = [5, 10, 25, 100];
 
-  constructor(private adressService: AdressManagementService, public dialog: MatDialog) { }
+  constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.getHeroes();
+    this.getAllEntries();
   }
 
-  getHeroes(event?: PageEvent): void {
+  getAllEntries(event?: PageEvent): void {
     console.log(event);
-    this.adressService.getHeroes(event)
+    this.adressService.getEntries(event)
       .subscribe(entries => {
         console.log(event);
         if (event) {
@@ -46,7 +46,7 @@ export class adressEntriesComponent implements OnInit {
   addEntry(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.adressService.addHero({ name } as Entry)
+    this.adressService.addEntry({ name } as Entry)
       .subscribe(entry => {
         this.entries.push(entry);
       });
@@ -54,7 +54,20 @@ export class adressEntriesComponent implements OnInit {
 
   deleteEntry(entry: Entry): void {
     this.entries = this.entries.filter(h => h !== entry);
-    this.adressService.deleteHero(entry).subscribe();   //callback is subscribe
+    this.adressService.deleteEntry(entry).subscribe();   //callback is subscribe
+  }
+
+  editEntry(entry: Entry): void {
+    let dialogRef = this.dialog.open(DialogComponent, {
+      width: '250px',
+      data: { entry: entry }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.adressService.updateEntry(result).subscribe(result => this.openSnackBar("Eintrag aktualisiert"))
+        console.log('edit result');
+      }
+    });
   }
 
   openConfirmDialog(entry: Entry): void {
@@ -64,6 +77,8 @@ export class adressEntriesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteEntry(entry);
+        this.openSnackBar("Eintrag entfernt");
+
       }
       console.log('The dialog was closed');
     });
@@ -80,9 +95,10 @@ export class adressEntriesComponent implements OnInit {
       console.log(result);
       if (result) {
         console.log(result);
-        this.adressService.addHero(result)    // as Entry
+        this.adressService.addEntry(result)    // as Entry
           .subscribe(entry => {
             this.entries.push(entry);
+            this.openSnackBar("Eintrag hinzugefügt");
           });
       }
 
@@ -90,6 +106,15 @@ export class adressEntriesComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
     });
+  }
+
+  openSnackBar(msg: string) {
+    // this.snackBar.openFromComponent(SnackbarComponent, {
+    //   duration: 500,
+    // });
+    let config = new MatSnackBarConfig();
+    config.duration = 1000;
+    this.snackBar.open(msg, null, config);
   }
 
 }

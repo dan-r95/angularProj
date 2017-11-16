@@ -1,24 +1,30 @@
 <div class="row">
-  <div class=' col-md-offset-4 col-md-4' style='text-align: center'>
+  <div class=' col-md-offset-4 col-md-3' style='text-align: center'>
+  <h4> Details für diesen Eintrag</h4>
     <mat-card class="example-card" *ngIf="entry">
       <mat-card-header>
-        <div mat-card-avatar>
+        <!-- <div mat-card-avatar>
           <mat-icon class="header-image">contacts</mat-icon>
-        </div>
+        </div> -->
+
         <!-- class="example-header-image"-->
         <mat-card-title>{{entry.forename +' '+ entry.name}}</mat-card-title>
-        <mat-card-subtitle *ngIf="entry.mobile">Mobil: {{entry.mobile}}</mat-card-subtitle>
-        <mat-card-subtitle *ngIf="entry.work">Arbeit: {{entry.work}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="entry.mobile">
+          <mat-icon>smartphone</mat-icon> Mobil: {{entry.mobile}}</mat-card-subtitle>
+        <mat-card-subtitle *ngIf="entry.work">
+          <mat-icon>phone</mat-icon>Arbeit: {{entry.work}}</mat-card-subtitle>
+        <div class="example-header-image"></div>
       </mat-card-header>
       <!-- <img mat-card-image src="http://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
       <mat-card-content>
-        <span *ngIf="entry.adress">id: </span>{{entry.adress}}
-        <span *ngIf="entry.zip">id: </span>{{entry.zip}}
-        <span *ngIf="entry.email">id: </span>{{entry.email}}
+        <span *ngIf="entry.email">Email: </span>{{entry.email}}
+        <span *ngIf="entry.adress">Adresse: </span>{{entry.adress}}
+        <span *ngIf="entry.zip">PLZ: </span>{{entry.zip}}
+        <span *ngIf="entry.town">Stadt: </span>{{entry.town}}
       </mat-card-content>
       <mat-card-actions>
-        <button mat-mini-fab color="primary"><mat-icon>edit</mat-icon></button>
-        <button mat-mini-fab color="primary"><mat-icon>delete</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon (click)="editEntry(entry)">edit</mat-icon></button>
+        <button mat-mini-fab color="primary"><mat-icon (click)="deleteEntry(entry)">delete</mat-icon></button>
       </mat-card-actions>
     </mat-card>
 
