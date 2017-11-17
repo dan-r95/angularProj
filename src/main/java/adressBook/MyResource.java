@@ -8,6 +8,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Root resource (exposed at "myresource" path)
@@ -26,7 +28,6 @@ public class MyResource {
     public String getIt() {
         return "Got it!";
     }
-
 
 
 //
@@ -52,21 +53,27 @@ public class MyResource {
     @Path("testJson")
     @Produces(MediaType.APPLICATION_JSON)
     public String getCustomer() {
-        JSONArray array =new JSONArray();
-        Contact test = new Contact();
-        test.setId(1);
-        test.setForename("Daniel");
-        test.setName("R");
-        test.setMobile("01764569112");
-        test.setEmail("dan@dan.de");
-        array.add(test.toJson());
-        Contact test2 = new Contact();
-        test2.setId(2);
-        test2.setForename("Daniela");
-        test2.setName("L");
-        test2.setWork("+493514569112");
-        test2.setEmail("dan@dan.com");
-        array.add(test2.toJson());
+        JSONArray array = new JSONArray();
+//        Contact test = new Contact();
+//        test.setId(1);
+//        test.setForename("Daniel");
+//        test.setName("R");
+//        test.setMobile("01764569112");
+//        test.setEmail("dan@dan.de");
+//        array.add(test.toJson());
+//        Contact test2 = new Contact();
+//        test2.setId(2);
+//        test2.setForename("Daniela");
+//        test2.setName("L");
+//        test2.setWork("+493514569112");
+//        test2.setEmail("dan@dan.com");
+//        array.add(test2.toJson());
+        HashMap<Integer, Contact> contactsById = databaseManager.tryDBConnection();
+        for (Map.Entry<Integer, Contact> entry : contactsById.entrySet()) {
+            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
+            array.add(entry.getValue().toJson());
+//            array.add(contactsById.values());
+        }
         return array.toJSONString();
 //        return test.toJsonString();
     }
@@ -75,7 +82,7 @@ public class MyResource {
     @Path("testJson/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getCustomer(@PathParam("id") Integer id) {
-        JSONArray array =new JSONArray();
+        JSONArray array = new JSONArray();
         Contact test = new Contact();
         test.setId(1);
         test.setForename("Daniel");

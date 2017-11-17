@@ -1,6 +1,7 @@
 package adressBook;
 
 import java.sql.*;
+import java.util.HashMap;
 
 public class databaseManager {
 
@@ -13,7 +14,7 @@ public class databaseManager {
     static final String PASS = "";
 
 
-    public static void tryDBConnection(){
+    public static HashMap<Integer, Contact> tryDBConnection() {
         Connection conn = null;
         Statement stmt = null;
         try {
@@ -28,28 +29,39 @@ public class databaseManager {
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT id, name, forename, email FROM contacts";
+            sql = "SELECT id, name, forename, email, mobile, work, adress, town, zip FROM contacts";
             ResultSet rs = stmt.executeQuery(sql);
+
+            HashMap<Integer, Contact> contactsById = new HashMap<>();
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
                 //Retrieve by column name
                 int id = rs.getInt("id");
+                String forename = rs.getString("forename");
+                String name = rs.getString("name");
                 String email = rs.getString("email");
-                String first = rs.getString("forename");
-                String last = rs.getString("name");
+                String mobile = rs.getString("mobile");
+                String work = rs.getString("work");
+                String adress = rs.getString("adress");
+                String town = rs.getString("town");
+                String zip = rs.getString("zip");
 
+                Contact contact = new Contact(id, forename, name, email, mobile, work, adress, town, zip);
+                contactsById.put(contact.getId(), contact);
 
-                //Display values
-                System.out.print("ID: " + id);
-                System.out.print(", Age: " + email);
-                System.out.print(", First: " + first);
-                System.out.println(", Last: " + last);
+//                //Display values
+//                System.out.print("ID: " + id);
+//                System.out.print(", Age: " + email);
+//                System.out.print(", First: " + first);
+//                System.out.println(", Last: " + last);
+//                System.out.println(", work: " + work);
             }
             //STEP 6: Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
+            return contactsById;
         } catch (SQLException se) {
             //Handle errors for JDBC
             se.printStackTrace();
@@ -71,11 +83,12 @@ public class databaseManager {
             }//end finally try
         }//end try
         System.out.println("Goodbye!");
+        return null;
     }
 
     public static void main(String[] args) {
         tryDBConnection();
-       //end main
+        //end main
     }//end FirstExample
 
 }
