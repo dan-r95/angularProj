@@ -25,31 +25,37 @@ export class adressEntriesComponent implements OnInit {
   constructor(private adressService: AdressManagementService, private dataService: DataProviderService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.dataService.getAllData().subscribe(data => {
+    this.getAllEntries();
+  }
+
+  getAllEntries(event?: PageEvent): void {
+    this.dataService.getAllData(event).subscribe(data => {
       // Read the result field from the JSON response.
       // this.results = data['results'];
+      if (event) {
+        this.pageIndex = event.pageIndex;
+        this.pageSize = event.pageSize;
+      }
+      this.entries = data;
+      this.length = data.length;
       console.log(data),
         // Errors will call this callback instead:
         err => {
           console.log('Something went wrong!');
         }
     });
-    this.getAllEntries();
-  }
-
-  getAllEntries(event?: PageEvent): void {
-    console.log(event);
-    this.adressService.getEntries(event)
-      .subscribe(entries => {
-        console.log(event);
-        if (event) {
-          this.pageIndex = event.pageIndex;
-          this.pageSize = event.pageSize;
-        }
-        this.entries = entries;
-        this.length = entries.length;
-
-      });
+    // console.log(event);
+    // this.adressService.getEntries(event)
+    //   .subscribe(entries => {
+    //     console.log(event);
+    //     if (event) {
+    //       this.pageIndex = event.pageIndex;
+    //       this.pageSize = event.pageSize;
+    //     }
+    //     this.entries = entries;
+    //     this.length = entries.length;
+    //
+    //   });
   }
   selectEntry(entry: Entry) { this.selectedEntry = entry; }
 

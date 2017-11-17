@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Entry } from './entry';
+import {PageEvent} from "@angular/material";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,8 +21,9 @@ export class DataProviderService {
 
   constructor(private http: HttpClient) { }
 
-  getAllData(): Observable<Entry> {
-    return this.http.get<Entry>(this.getTestEntry).pipe(catchError(this.handleError<Entry>('getAllData')));
+  getAllData(event?: PageEvent): Observable<Entry[]> {
+    console.log(event);
+    return this.http.get<Entry[]>(this.getTestEntry).pipe(catchError(this.handleError<Entry[]>('getAllData')));
 
   }
 

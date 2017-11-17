@@ -52,12 +52,22 @@ public class MyResource {
     @Path("testJson")
     @Produces(MediaType.APPLICATION_JSON)
     public String getCustomer() {
+        JSONArray array =new JSONArray();
         Contact test = new Contact();
         test.setId(1);
         test.setForename("Daniel");
         test.setName("R");
         test.setMobile("01764569112");
         test.setEmail("dan@dan.de");
-        return test.toJsonString();
+        array.add(test.toJson());
+        Contact test2 = new Contact();
+        test2.setId(2);
+        test2.setForename("Daniela");
+        test2.setName("L");
+        test2.setWork("+493514569112");
+        test2.setEmail("dan@dan.com");
+        array.add(test2.toJson());
+        return array.toJSONString();
+//        return test.toJsonString();
     }
 }

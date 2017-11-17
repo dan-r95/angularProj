@@ -29,8 +29,19 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Architecture
 
+Jersey wrapper installation via maven:
 
+`` mvn archetype:generate-DarchetypeGroupId=org.glassfish.jersey.archetypes \
+    -DarchetypeArtifactId=jersey-quickstart-grizzly2 -DarchetypeVersion=2.26``
 
+Communication in dev mode is configured via a proxy in
+```
+adressBook
+│   web
+|   ├── web\proxy.conf.json
+|   ├── web\package.json
+```
+and package.json is modified. Use ```npm start``` to start the node server
 
 
 ## Dependecies
