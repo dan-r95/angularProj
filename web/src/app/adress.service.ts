@@ -17,7 +17,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/ma
 @Injectable()
 export class AdressManagementService {
 
-  private adressesUrl = 'api/entries';  // URL to web api
+  // private adressesUrl = 'api/entries';  // URL to web api
+  private adressesUrl = '/api/adressBook/myresource/testJson';
 
   constructor(private http: HttpClient) { }
 
@@ -33,6 +34,7 @@ export class AdressManagementService {
   getEntry(id: number): Observable<Entry> {
     const url = `${this.adressesUrl}/${id}`;
     // this.messageService.add(`HeroService: fetched hero id=${id}`);
+    console.log(url);
     return this.http.get<Entry>(url).pipe(
       catchError(this.handleError<Entry>(`getEntry id=${id}`))
     );

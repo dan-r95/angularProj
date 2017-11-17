@@ -29,24 +29,24 @@ public class MyResource {
 
 
 
-
-    @GET
-    @Path("test/{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public String getCustomer(@PathParam("id") Integer id) {
-        JSONObject obj = new JSONObject();
-        obj.put("name", "mkyong.com");
-        obj.put("age", new Integer(id));
-
-        JSONArray list = new JSONArray();
-        list.add("msg 1");
-        list.add("msg 2");
-        list.add("msg 3");
-
-        obj.put("messages", list);
-        String obj2 = obj.toJSONString();
-        return obj2;
-    }
+//
+//    @GET
+//    @Path("test/{id}")
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public String getCustomer(@PathParam("id") Integer id) {
+//        JSONObject obj = new JSONObject();
+//        obj.put("name", "mkyong.com");
+//        obj.put("age", new Integer(id));
+//
+//        JSONArray list = new JSONArray();
+//        list.add("msg 1");
+//        list.add("msg 2");
+//        list.add("msg 3");
+//
+//        obj.put("messages", list);
+//        String obj2 = obj.toJSONString();
+//        return obj2;
+//    }
 
     @GET
     @Path("testJson")
@@ -68,6 +68,22 @@ public class MyResource {
         test2.setEmail("dan@dan.com");
         array.add(test2.toJson());
         return array.toJSONString();
+//        return test.toJsonString();
+    }
+
+    @GET
+    @Path("testJson/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCustomer(@PathParam("id") Integer id) {
+        JSONArray array =new JSONArray();
+        Contact test = new Contact();
+        test.setId(1);
+        test.setForename("Daniel");
+        test.setName("R");
+        test.setMobile("01764569112");
+        test.setEmail("dan@dan.de");
+//        array.add(test.toJson());
+        return test.toJsonString();
 //        return test.toJsonString();
     }
 }

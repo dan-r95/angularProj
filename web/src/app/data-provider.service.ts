@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { Entry } from './entry';
-import {PageEvent} from "@angular/material";
+import { PageEvent } from "@angular/material";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,7 +17,7 @@ export class DataProviderService {
 
   // private api = 'http://localhost:8080/'
   // this.api +
-  private getTestEntry =  '/api/adressBook/myresource/testJson';  // URL to web api
+  private getTestEntry = '/api/adressBook/myresource/testJson';  // URL to web api
 
   constructor(private http: HttpClient) { }
 

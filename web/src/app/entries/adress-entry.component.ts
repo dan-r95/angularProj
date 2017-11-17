@@ -29,7 +29,7 @@ export class adressEntriesComponent implements OnInit {
   }
 
   getAllEntries(event?: PageEvent): void {
-    this.dataService.getAllData(event).subscribe(data => {
+    this.adressService.getEntries(event).subscribe(data => {
       // Read the result field from the JSON response.
       // this.results = data['results'];
       if (event) {

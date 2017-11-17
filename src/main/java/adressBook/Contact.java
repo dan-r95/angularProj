@@ -13,6 +13,18 @@ public class Contact {
     private String work;
     private String email;
 
+    public Contact(Integer id, String forename, String name, String zipcode, String adress, String town, String mobile, String work, String email) {
+        setId(id);
+        setForename(forename);
+        setName(name);
+        setZipcode(zipcode);
+        setAdress(adress);
+        setTown(town);
+        setMobile(mobile);
+        setWork(work);
+        setEmail(email);
+    }
+
     public Integer getId() {
         return id;
     }
@@ -85,11 +97,11 @@ public class Contact {
         this.email = email;
     }
 
-    public void setId(){
+    public void setId() {
 
     }
 
-    public JSONObject toJson(){
+    public JSONObject toJson() {
         JSONObject json = new JSONObject();
         json.put("id", getId());
         json.put("name", getName());
@@ -104,7 +116,7 @@ public class Contact {
 
     }
 
-    public String  toJsonString(){
+    public String toJsonString() {
         JSONObject json = toJson();
         return json.toJSONString();
 
