@@ -9,11 +9,12 @@ import { EntryPipe } from './entries.pipe'
 import { AdressDetailComponent } from './adress-detail/adress-detail.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { DataProviderService } from './data-provider.service';
 
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
-MatButtonModule, MatCheckboxModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
+  MatButtonModule, MatCheckboxModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
   MatPaginatorModule, MatIconModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule, MatCardModule,
   MatToolbarModule, MatSnackBarModule
 } from '@angular/material';
@@ -39,11 +40,11 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
     BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
     AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
-    MatCardModule, MatToolbarModule, HttpClientModule, MatSnackBarModule,
-    HttpClientInMemoryWebApiModule.forRoot(MockDataService, { dataEncapsulation: false }
-    )
+    MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule
+    // ,HttpClientInMemoryWebApiModule.forRoot(MockDataService, { dataEncapsulation: false }
+    // )
   ],  //MatDialog MatDialogRef
-  providers: [AdressManagementService, MessageService],
+  providers: [AdressManagementService, MessageService, DataProviderService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent, ConfirmDialogComponent, SnackbarComponent]
 })

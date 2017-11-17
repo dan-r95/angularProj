@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Entry } from '../entry';
 import { AdressManagementService } from '../adress.service';
+import { DataProviderService } from '../data-provider.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
@@ -21,9 +22,18 @@ export class adressEntriesComponent implements OnInit {
   pageSize = 4;
   pageSizeOptions = [5, 10, 25, 100];
 
-  constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(private adressService: AdressManagementService, private dataService: DataProviderService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.dataService.getAllData().subscribe(data => {
+      // Read the result field from the JSON response.
+      // this.results = data['results'];
+      console.log(data),
+        // Errors will call this callback instead:
+        err => {
+          console.log('Something went wrong!');
+        }
+    });
     this.getAllEntries();
   }
 
