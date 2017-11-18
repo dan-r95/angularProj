@@ -19,6 +19,7 @@ export class AdressManagementService {
 
   // private adressesUrl = 'api/entries';  // URL to web api
   private adressesUrl = '/api/adressBook/myresource/testJson';
+  private addUrl = 'api/adressBook/myresource/add';
 
   constructor(private http: HttpClient) { }
 
@@ -63,7 +64,37 @@ export class AdressManagementService {
 
   /** POST: add a new hero to the server */
   addEntry(entry: Entry): Observable<Entry> {
-    return this.http.post<Entry>(this.adressesUrl, entry, httpOptions).pipe(
+
+    let body = new URLSearchParams();
+    //  for (var i in entry) {
+    // if (entry.hasOwnProperty(i)) {
+    //    entry[i]=entry[i];
+    // }
+    // if(entry.name)
+    body.set('name', entry.name);
+    body.set('forename', entry.forename);
+    body.set('email', entry.email);
+    if (entry.mobile) {
+      body.set('mobile', entry.mobile);
+    }
+    if (entry.work) {
+      body.set('work', entry.work);
+    }
+    if (entry.zip) {
+      body.set('zip', entry.zip.toString());
+    }
+    if (entry.adress) {
+      body.set('adress', entry.adress);
+    }
+    if (entry.town) {
+      body.set('town', entry.town);
+    }
+
+    let options = {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+
+    return this.http.post<Entry>(this.addUrl, body.toString(), options).pipe(
       catchError(this.handleError<Entry>('addEntry'))
     );
   }

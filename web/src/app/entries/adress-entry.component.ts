@@ -64,7 +64,12 @@ export class adressEntriesComponent implements OnInit {
     if (!name) { return; }
     this.adressService.addEntry({ name } as Entry)
       .subscribe(entry => {
+          console.log(entry);
+        // if(error){
+        //   this.openSnackBar("Serverseitiger Fehler :/");
+        // } else{
         this.entries.push(entry);
+      // }
       });
   }
 

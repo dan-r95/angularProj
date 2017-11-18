@@ -44,7 +44,7 @@
       <div>Page size: {{pageEvent.pageSize}}</div>
       <div>Page index: {{pageEvent.pageIndex}}</div>
     </div>
-    <mat-paginator *ngIf="entries" [length]="length" [pageSize]="5" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 50]" (page)="pageEvent = getAllData($event)">
+    <mat-paginator *ngIf="entries" [length]="length" [pageSize]="5" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 50]" (page)="pageEvent = getAllEntries($event)">
     </mat-paginator>
     <div>
       <button mat-mini-fab color="primary" (click)="openDialog()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon></button>

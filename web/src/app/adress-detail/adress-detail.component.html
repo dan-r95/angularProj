@@ -1,6 +1,6 @@
 <div class="row">
   <div class=' col-md-offset-4 col-md-3' style='text-align: center'>
-  <h4> Details für diesen Eintrag</h4>
+    <h4> Details für diesen Eintrag</h4>
     <mat-card class="example-card" *ngIf="entry">
       <mat-card-header>
         <!-- <div mat-card-avatar>
@@ -17,10 +17,10 @@
       </mat-card-header>
       <!-- <img mat-card-image src="http://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
       <mat-card-content>
-        <span *ngIf="entry.email">Email: </span>{{entry.email}}
-        <span *ngIf="entry.adress">Adresse: </span>{{entry.adress}}
-        <span *ngIf="entry.zip">PLZ: </span>{{entry.zip}}
-        <span *ngIf="entry.town">Stadt: </span>{{entry.town}}
+        <p *ngIf="entry.email">Email: {{entry.email}} </p>
+        <p *ngIf="entry.adress">Adresse: {{entry.adress}} </p>
+        <p *ngIf="entry.zip">PLZ: {{entry.zip}} </p>
+        <p *ngIf="entry.town">Stadt: {{entry.town}} </p>
       </mat-card-content>
       <mat-card-actions>
         <button mat-mini-fab color="primary"><mat-icon (click)="editEntry(entry)">edit</mat-icon></button>
