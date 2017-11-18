@@ -8,6 +8,11 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { Entry } from './entry';
 import { MessageService } from './message.service';
 
+//request body options
+const bodyOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'} )
+};
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -20,6 +25,8 @@ export class AdressManagementService {
   // private adressesUrl = 'api/entries';  // URL to web api
   private adressesUrl = '/api/adressBook/myresource/testJson';
   private addUrl = 'api/adressBook/myresource/add';
+  private deleteUrl = 'api/adressBook/myresource/delete';
+  private updateUrl = 'api/adressBook/myresource/edit';
 
   constructor(private http: HttpClient) { }
 
@@ -57,7 +64,7 @@ export class AdressManagementService {
 
   /** PUT: update the hero on the server */
   updateEntry(entry: Entry): Observable<any> {
-    return this.http.put(this.adressesUrl, entry, httpOptions).pipe(
+    return this.http.put(this.updateUrl, entry, bodyOptions).pipe(
       catchError(this.handleError<any>('updateEntry'))
     );
   }
@@ -102,7 +109,8 @@ export class AdressManagementService {
   /** DELETE: delete the hero from the server */
   deleteEntry(entry: Entry | number): Observable<Entry> {
     const id = typeof entry === 'number' ? entry : entry.id;
-    const url = `${this.adressesUrl}/${id}`;
+    console.log("delete " + id);
+    const url = `${this.deleteUrl}/${id}`;
 
     return this.http.delete<Entry>(url, httpOptions).pipe(
       catchError(this.handleError<Entry>('deleteEntry'))

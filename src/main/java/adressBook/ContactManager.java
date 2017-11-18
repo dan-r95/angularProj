@@ -24,7 +24,7 @@ public class ContactManager {
             }
 
         } else {
-            cachedContacts = databaseManager.tryDBConnection();
+            cachedContacts = databaseManager.getInstance().tryDBConnection();
             Contact contact = cachedContacts.get(id);
             if (contact != null) {
                 return contact;
@@ -39,7 +39,7 @@ public class ContactManager {
             return cachedContacts.values();  //(Contact[]) .toArray();
 
         } else {
-            cachedContacts = databaseManager.tryDBConnection();
+            cachedContacts = databaseManager.getInstance().tryDBConnection();
             if (cachedContacts != null) {
                 return cachedContacts.values();  // (Contact[]) .toArray();
             }
@@ -49,11 +49,23 @@ public class ContactManager {
 
 
     public boolean refreshCache(){
-        cachedContacts = databaseManager.tryDBConnection();
+        cachedContacts = databaseManager.getInstance().tryDBConnection();
         if (cachedContacts != null) {
             return true;
         }
         return false;
+    }
+
+    public boolean deleteContact(Integer id){
+        boolean completed= databaseManager.getInstance().deleteEntry(id);
+        cachedContacts = databaseManager.getInstance().tryDBConnection();
+        return completed;
+    }
+
+    public boolean updateEntry(Contact contact){
+        boolean completed= databaseManager.getInstance().updateEntry(contact);
+        cachedContacts = databaseManager.getInstance().tryDBConnection();
+        return completed;
     }
 
 }

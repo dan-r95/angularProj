@@ -124,7 +124,7 @@ public class MyResource {
     @POST
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addCustomer(@FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
+    public String addContact(@FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
 //        JSONArray array = new JSONArray();
 //        Contact test = new Contact();
 //        test.setId(1);
@@ -139,7 +139,7 @@ public class MyResource {
             Contact contact = new Contact(20, forename, name, email, mobile, work, adress, town, zip);
 
 
-            boolean completed = databaseManager.addEntry(contact);
+            boolean completed = databaseManager.getInstance().addEntry(contact);
 
 
             if (completed) {
@@ -153,5 +153,70 @@ public class MyResource {
 
         return json.toJSONString();
 //        return test.toJsonString();
+    }
+
+    @PUT
+    @Path("edit")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String editContact(@FormParam("id") Integer id, @FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
+
+        JSONObject json = new JSONObject();
+        if (name != null && forename != null && email != null && id!= null) {
+            Contact contact = new Contact(id, forename, name, email, mobile, work, adress, town, zip);
+
+
+            boolean completed = ContactManager.getInstance().updateEntry(contact);
+
+
+            if (completed) {
+                return contact.toJsonString();
+//                json.put("", "added entry");
+            } else {
+                json.put("task", "error");
+            }
+        }
+
+        return json.toJSONString();
+    }
+
+    @DELETE
+    @Path("delete/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteContact(@PathParam("id") Integer id) {
+//        JSONArray array = new JSONArray();
+//        Contact test = new Contact();
+//        test.setId(1);
+//        test.setForename("Daniel");
+//        test.setName("R");
+//        test.setMobile("01764569112");
+//        test.setEmail("dan@dan.de");
+////        array.add(test.toJson());
+        //nächst mögliche id? per property, die hier hochzählt?, und die letzt höchste beim initialisieren bekommt als wert
+//        JSONObject json = new JSONObject();
+//        if (name != null && forename != null && email != null) {
+//            Contact contact = new Contact(20, forename, name, email, mobile, work, adress, town, zip);
+//
+//
+//            boolean completed = databaseManager.getInstance().addEntry(contact);
+//
+//
+//            if (completed) {
+//                ContactManager.getInstance().refreshCache();
+//                return contact.toJsonString();
+////                json.put("", "added entry");
+//            } else {
+//                json.put("error", "no key with that id");
+//            }
+//        }
+//
+//        return json.toJSONString();
+        JSONObject json = new JSONObject();
+        boolean completed = ContactManager.getInstance().deleteContact(id);
+        if (completed) {
+                json.put("task", "success");
+            } else {
+                json.put("task", "error");
+            }
+        return json.toJSONString();
     }
 }
