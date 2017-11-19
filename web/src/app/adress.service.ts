@@ -68,7 +68,34 @@ export class AdressManagementService {
     console.log(this.updateUrl);
     console.log(entry);
 console.log(bodyOptions);
-    return this.http.put(this.updateUrl, entry, bodyOptions).pipe(
+
+let body = new URLSearchParams();
+//  for (var i in entry) {
+// if (entry.hasOwnProperty(i)) {
+//    entry[i]=entry[i];
+// }
+// if(entry.name)
+body.set('id', entry.id.toString());
+body.set('name', entry.name);
+body.set('forename', entry.forename);
+body.set('email', entry.email);
+if (entry.mobile) {
+  body.set('mobile', entry.mobile);
+}
+if (entry.work) {
+  body.set('work', entry.work);
+}
+if (entry.zip) {
+  body.set('zip', entry.zip.toString());
+}
+if (entry.adress) {
+  body.set('adress', entry.adress);
+}
+if (entry.town) {
+  body.set('town', entry.town);
+}
+
+    return this.http.put(this.updateUrl, body.toString(), bodyOptions).pipe(
       catchError(this.handleError<any>('updateEntry'))
     );
   }

@@ -33,7 +33,7 @@ export class AppComponent {
       if (result) {
         this.deleteAll();
         this.openSnackBar("Datenbank zurückgesetzt");
-        this.location.go("/adresses");
+        this.location.back();
       }
 
     });
