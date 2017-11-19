@@ -56,16 +56,31 @@ public class ContactManager {
         return false;
     }
 
+    public Integer addContact(Contact contact){
+        Integer completed= databaseManager.getInstance().addEntry(contact);
+        cachedContacts = databaseManager.getInstance().tryDBConnection();
+        return completed;
+    }
+
+
+    public boolean updateContact(Contact contact){
+        boolean completed= databaseManager.getInstance().updateEntry(contact);
+        cachedContacts = databaseManager.getInstance().tryDBConnection();
+        return completed;
+    }
+
     public boolean deleteContact(Integer id){
         boolean completed= databaseManager.getInstance().deleteEntry(id);
         cachedContacts = databaseManager.getInstance().tryDBConnection();
         return completed;
     }
 
-    public boolean updateEntry(Contact contact){
-        boolean completed= databaseManager.getInstance().updateEntry(contact);
+    public boolean deleteAllContacts(){
+        boolean completed= databaseManager.getInstance().deleteAll();
         cachedContacts = databaseManager.getInstance().tryDBConnection();
         return completed;
     }
+
+
 
 }

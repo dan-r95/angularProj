@@ -19,7 +19,7 @@ public class Contact {
         setId(id);
         setForename(forename);
         setName(name);
-        setZipcode(zipcode);
+        setZipcode(zip);
         setAdress(adress);
         setTown(town);
         setMobile(mobile);

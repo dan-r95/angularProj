@@ -6,13 +6,11 @@ import org.json.simple.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Root resource (exposed at "myresource" path)
  */
-@Path("adressBook/myresource")
+@Path("adressBook/")
 public class MyResource {
 
     /**
@@ -53,7 +51,7 @@ public class MyResource {
      * @return
      */
     @GET
-    @Path("testJson")
+    @Path("contacts")
     @Produces(MediaType.APPLICATION_JSON)
     public String getContacts() {
         JSONArray array = new JSONArray();
@@ -79,7 +77,7 @@ public class MyResource {
 //        }
 
         Collection<Contact> contacts = ContactManager.getInstance().getAllContacts();
-        for (Contact contact: contacts){
+        for (Contact contact : contacts) {
             array.add(contact.toJson());
         }
 
@@ -97,7 +95,7 @@ public class MyResource {
      * @return
      */
     @GET
-    @Path("testJson/{id}")
+    @Path("contacts/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getContact(@PathParam("id") Integer id) {
 //        JSONArray array = new JSONArray();
@@ -136,13 +134,13 @@ public class MyResource {
         //nächst mögliche id? per property, die hier hochzählt?, und die letzt höchste beim initialisieren bekommt als wert
         JSONObject json = new JSONObject();
         if (name != null && forename != null && email != null) {
-            Contact contact = new Contact(20, forename, name, email, mobile, work, adress, town, zip);
+            Contact contact = new Contact(null, forename, name, email, mobile, work, adress, town, zip);
 
 
-            boolean completed = databaseManager.getInstance().addEntry(contact);
+            Integer completed = ContactManager.getInstance().addContact(contact);
 
 
-            if (completed) {
+            if (completed > -1) {
                 ContactManager.getInstance().refreshCache();
                 return contact.toJsonString();
 //                json.put("", "added entry");
@@ -161,11 +159,11 @@ public class MyResource {
     public String editContact(@FormParam("id") Integer id, @FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
 
         JSONObject json = new JSONObject();
-        if (name != null && forename != null && email != null && id!= null) {
+        if (name != null && forename != null && email != null && id != null) {
             Contact contact = new Contact(id, forename, name, email, mobile, work, adress, town, zip);
 
 
-            boolean completed = ContactManager.getInstance().updateEntry(contact);
+            boolean completed = ContactManager.getInstance().updateContact(contact);
 
 
             if (completed) {
@@ -213,10 +211,24 @@ public class MyResource {
         JSONObject json = new JSONObject();
         boolean completed = ContactManager.getInstance().deleteContact(id);
         if (completed) {
-                json.put("task", "success");
-            } else {
-                json.put("task", "error");
-            }
+            json.put("task", "success");
+        } else {
+            json.put("task", "error");
+        }
+        return json.toJSONString();
+    }
+
+    @DELETE
+    @Path("deleteAll")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String deleteAll() {
+        JSONObject json = new JSONObject();
+        boolean completed = ContactManager.getInstance().deleteAllContacts();
+        if (completed) {
+            json.put("task", "success");
+        } else {
+            json.put("task", "error");
+        }
         return json.toJSONString();
     }
 }

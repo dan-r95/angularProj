@@ -10,7 +10,7 @@ import { MessageService } from './message.service';
 
 //request body options
 const bodyOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded'} )
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
 };
 
 const httpOptions = {
@@ -23,10 +23,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent } from '@angular/ma
 export class AdressManagementService {
 
   // private adressesUrl = 'api/entries';  // URL to web api
-  private adressesUrl = '/api/adressBook/myresource/testJson';
-  private addUrl = 'api/adressBook/myresource/add';
-  private deleteUrl = 'api/adressBook/myresource/delete';
-  private updateUrl = 'api/adressBook/myresource/edit';
+  private adressesUrl = '/api/adressBook/contacts';
+  private addUrl = 'api/adressBook/add';
+  private deleteUrl = 'api/adressBook/delete';
+  private deleteAllUrl = 'api/adressBook/deleteAll';
+  private updateUrl = 'api/adressBook/edit';
 
   constructor(private http: HttpClient) { }
 
@@ -113,6 +114,14 @@ export class AdressManagementService {
     const url = `${this.deleteUrl}/${id}`;
 
     return this.http.delete<Entry>(url, httpOptions).pipe(
+      catchError(this.handleError<Entry>('deleteEntry'))
+    );
+  }
+
+  /** DELETE: delete the hero from the server */
+  deleteAll(): Observable<any> {
+    console.log("deleteAll");
+    return this.http.delete<Entry>(this.deleteAllUrl, httpOptions).pipe(
       catchError(this.handleError<Entry>('deleteEntry'))
     );
   }
