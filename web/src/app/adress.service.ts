@@ -65,6 +65,9 @@ export class AdressManagementService {
 
   /** PUT: update the hero on the server */
   updateEntry(entry: Entry): Observable<any> {
+    console.log(this.updateUrl);
+    console.log(entry);
+console.log(bodyOptions);
     return this.http.put(this.updateUrl, entry, bodyOptions).pipe(
       catchError(this.handleError<any>('updateEntry'))
     );

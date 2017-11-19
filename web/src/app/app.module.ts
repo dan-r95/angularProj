@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
   MatPaginatorModule, MatIconModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatFormFieldModule, MatCardModule,
-  MatToolbarModule, MatSnackBarModule
+  MatToolbarModule, MatSnackBarModule, MatMenuModule
 } from '@angular/material';
 import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -40,7 +40,7 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
     BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
     BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
     AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
-    MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule
+    MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule
     // ,HttpClientInMemoryWebApiModule.forRoot(MockDataService, { dataEncapsulation: false }
     // )
   ],  //MatDialog MatDialogRef

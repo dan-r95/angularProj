@@ -2,6 +2,13 @@ import { Component } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material';
 
+import { AdressManagementService } from './adress.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
+
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,16 +16,34 @@ import { MatIconRegistry } from '@angular/material';
   // providers: [MatIconRegistry]
 })
 export class AppComponent {
-  title = 'Adress Book';
   angularDocsUrl = "https://github.com/rossy95/angularProj"
-  //   constructor(iconRegistry: MatIconRegistry, sanitizer: DomSanitizer) {
-  //         iconRegistry.addSvgIconSetInNamespace( "add", sanitizer.
-  //         bypassSecurityTrustResourceUrl("assets/svg/ic_add_black_24px.svg"));
-  //         iconRegistry.addSvgIconSetInNamespace( "delete", sanitizer.
-  //         bypassSecurityTrustResourceUrl("assets/svg/ic_delete_black_24px.svg"));
-  //         iconRegistry.addSvgIconSetInNamespace( "edit", sanitizer.
-  //         bypassSecurityTrustResourceUrl("assets/svg/ic_mode_edit_black_24px.svg"));
-  // }
-  // minDate = new Date(2000, 0, 1);
-  // maxDate = new Date(2020, 0, 1);
+
+  constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar,
+    private route: ActivatedRoute, private location: Location) { }
+
+  deleteAll(): void {
+    this.adressService.deleteAll().subscribe();
+  }
+
+  openConfirmDialog(): void {
+    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteAll();
+        this.openSnackBar("Datenbank zurückgesetzt");
+        this.location.go("/adresses");
+      }
+
+    });
+
+  }
+
+  openSnackBar(msg: string) {
+    let config = new MatSnackBarConfig();
+    config.duration = 1000;
+    this.snackBar.open(msg, null, config);
+  }
+
 }
