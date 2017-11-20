@@ -34,7 +34,6 @@ public class ContactsResource {
             return array.toJSONString();
         }
         return new JSONArray().toJSONString();
-//        return test.toJsonString();
     }
 
     /**
@@ -56,7 +55,6 @@ public class ContactsResource {
         JSONObject json = new JSONObject();
         json.put("error", "no key with that id");
         return json.toJSONString();
-//        return test.toJsonString();
     }
 
     @POST
@@ -64,7 +62,6 @@ public class ContactsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String addContact(@FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
 
-        //nächst mögliche id? per property, die hier hochzählt?, und die letzt höchste beim initialisieren bekommt als wert
         JSONObject json = new JSONObject();
         if (name != null && forename != null && email != null) {
             Contact contact = new Contact(null, forename, name, email, mobile, work, adress, town, zip);
@@ -76,14 +73,12 @@ public class ContactsResource {
             if (completed > -1) {
                 ContactManager.getInstance().refreshCache();
                 return contact.toJsonString();
-//                json.put("", "added entry");
             } else {
                 json.put("error", "no key with that id");
             }
         }
 
         return json.toJSONString();
-//        return test.toJsonString();
     }
 
     @PUT
@@ -101,7 +96,6 @@ public class ContactsResource {
 
             if (completed) {
                 return contact.toJsonString();
-//                json.put("", "added entry");
             } else {
                 json.put("task", "error");
             }

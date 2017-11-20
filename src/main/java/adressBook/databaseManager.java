@@ -26,9 +26,7 @@ public class DatabaseManager {
 
     public HashMap<Integer, Contact> tryDBConnection() {
 
-        //FIXME if this.contacthashmap != null, get key from there
-        //FIXME if == null then get connection to db
-        // FIXME on update / add -> overwrite the hashmap
+   //FIXME should replace some of the redundant connection code, switch sql statements ...
 
         Connection conn = null;
         Statement stmt = null;
@@ -51,8 +49,6 @@ public class DatabaseManager {
 
             //STEP 5: Extract data from result set
             while (rs.next()) {
-//                System.out.println(rs.());
-                //Retrieve by column name
                 int id = rs.getInt("id");
                 String forename = rs.getString("forename");
                 String name = rs.getString("name");
@@ -66,12 +62,6 @@ public class DatabaseManager {
                 Contact contact = new Contact(id, forename, name, email, mobile, work, adress, town, zip);
                 contactsById.put(contact.getId(), contact);
 
-//                //Display values
-//                System.out.print("ID: " + id);
-//                System.out.print(", Age: " + email);
-//                System.out.print(", First: " + first);
-//                System.out.println(", Last: " + last);
-//                System.out.println(", work: " + work);
             }
             //STEP 6: Clean-up environment
             rs.close();
@@ -98,7 +88,7 @@ public class DatabaseManager {
             } catch (SQLException se) {
                 se.printStackTrace();
             }//end finally try
-        }//end try
+        }
         System.out.println("Goodbye!");
         return null;
     }
@@ -107,14 +97,11 @@ public class DatabaseManager {
         Connection conn = null;
         Statement stmt = null;
         try {
-            //STEP 2: Register JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
 
-            //STEP 3: Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //STEP 4: Execute a query
             System.out.println("Creating statement...");
             String forename = contact.getForename();
             String name = contact.getName();
@@ -127,17 +114,10 @@ public class DatabaseManager {
 
             stmt = conn.createStatement();
             String sql;
-//            sql = ...
-//            PreparedStatement sqlStatement = conn.prepareStatement("SELECT LAST_INSERT_ID()");
-//            ResultSet rs = sqlStatement.executeQuery();
-//            if (rs.next()) {
-//                Id = rs.getInt(1);
-//            }
-//            Id ++;
+
             PreparedStatement sqlStatement;
             sqlStatement = conn.prepareStatement("insert into contacts (name, forename, email, mobile, work, adress, town, zip) " +
                     "values(?, ?, ?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-//            sqlStatement.setInt(1, Id);
             sqlStatement.setString(1, name);
             sqlStatement.setString(2, forename);
             sqlStatement.setString(3, email);
@@ -147,10 +127,7 @@ public class DatabaseManager {
             sqlStatement.setString(7, town);
             sqlStatement.setString(8, zip);
 
-
-//            "values(" + Id + "," + forename + "," + name + "," + email + "," + mobile + "," + work + "," + adress + "," + town + "," + zip + ")";
             System.out.print(sqlStatement.toString());
-//            System.out.print(sql);
             sqlStatement.executeUpdate();
             ResultSet rs = sqlStatement.getGeneratedKeys();
             if (rs.next()) {
@@ -159,25 +136,22 @@ public class DatabaseManager {
             }
             return -1;
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
-        }//end try
+            }
+        }
         System.out.println("Goodbye!");
         return -1;
 
@@ -187,14 +161,11 @@ public class DatabaseManager {
         Connection conn = null;
         Statement stmt = null;
         try {
-            //STEP 2: Register JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
 
-            //STEP 3: Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //STEP 4: Execute a query
             System.out.println("Creating statement...");
             Integer Id = contact.getId();
             String forename = contact.getForename();
@@ -208,17 +179,10 @@ public class DatabaseManager {
 
             stmt = conn.createStatement();
             String sql;
-//            sql = ...
-//            PreparedStatement sqlStatement = conn.prepareStatement("SELECT LAST_INSERT_ID()");
-//            ResultSet rs = sqlStatement.executeQuery();
-//            if (rs.next()) {
-//                Id = rs.getInt(1);
-//            }
-//            Id ++;
+
             PreparedStatement sqlStatement;
             sqlStatement = conn.prepareStatement("UPDATE contacts SET  forename= ?, name = ?, email=?, mobile=?, work=?, adress=?, town=?, zip=?  " +
                     "WHERE id = ?;");
-//            sqlStatement.setInt(1, Id);
             sqlStatement.setString(1, forename);
             sqlStatement.setString(2, name);
             sqlStatement.setString(3, email);
@@ -229,12 +193,8 @@ public class DatabaseManager {
             sqlStatement.setString(8, zip);
             sqlStatement.setInt(9, Id);
 
-
-//            "values(" + Id + "," + forename + "," + name + "," + email + "," + mobile + "," + work + "," + adress + "," + town + "," + zip + ")";
             System.out.print(sqlStatement.toString());
-//            System.out.print(sql);
             Integer rs2 = sqlStatement.executeUpdate();
-//            Integer rs = stmt.executeUpdate(sql);
             if (rs2 > 0) {
                 System.out.println("Goodbye! success");
                 return true;
@@ -242,25 +202,22 @@ public class DatabaseManager {
                 return false;
             }
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
-        }//end try
+            }
+        }
         System.out.println("Goodbye!");
         return false;
 
@@ -272,35 +229,22 @@ public class DatabaseManager {
         try {
 
             if (Id != null) {
-                //STEP 2: Register JDBC driver
                 Class.forName("com.mysql.jdbc.Driver");
 
-                //STEP 3: Open a connection
                 System.out.println("Connecting to database...");
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-                //STEP 4: Execute a query
                 System.out.println("Creating statement...");
 
                 stmt = conn.createStatement();
                 String sql;
-//            sql = ...
-//            PreparedStatement sqlStatement = conn.prepareStatement("SELECT LAST_INSERT_ID()");
-//            ResultSet rs = sqlStatement.executeQuery();
-//            if (rs.next()) {
-//                Id = rs.getInt(1);
-//            }
-//            Id ++;
                 PreparedStatement sqlStatement;
                 sqlStatement = conn.prepareStatement("DELETE FROM contacts WHERE id = ?");
                 sqlStatement.setInt(1, Id);
 
 
-//            "values(" + Id + "," + forename + "," + name + "," + email + "," + mobile + "," + work + "," + adress + "," + town + "," + zip + ")";
                 System.out.print(sqlStatement.toString());
-//            System.out.print(sql);
                 Integer rs2 = sqlStatement.executeUpdate();
-//            Integer rs = stmt.executeUpdate(sql);
                 if (rs2 > 0) {
                     System.out.println("Goodbye! success");
                     return true;
@@ -310,25 +254,22 @@ public class DatabaseManager {
             }
             return false;
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
-        }//end try
+            }
+        }
         System.out.println("Goodbye!");
 
         return false;
@@ -338,14 +279,11 @@ public class DatabaseManager {
         Connection conn = null;
         Statement stmt = null;
         try {
-            //STEP 2: Register JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
 
-            //STEP 3: Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //STEP 4: Execute a query
             System.out.println("Creating statement...");
 
             stmt = conn.createStatement();
@@ -362,25 +300,22 @@ public class DatabaseManager {
             }
 
         } catch (SQLException se) {
-            //Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            }
             try {
                 if (conn != null)
                     conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
-        }//end try
+            }
+        }
         System.out.println("Goodbye!");
         return false;
 

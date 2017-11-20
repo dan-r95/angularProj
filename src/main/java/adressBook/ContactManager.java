@@ -99,15 +99,6 @@ public class ContactManager {
             List<Contact> list = stream.collect(Collectors.toList());
             return list;
 
-
-// forEach(e -> {
-//                        Contact c = e.getValue();
-//                        int tot = v.entrySet().stream()
-//                                .reduce(0, (x, ee) -> x + ee.getValue(), (x, y) -> x+y);
-//                        v.put(0, tot);
-//                    });
-//        }
-
         }
         return null;
     }
