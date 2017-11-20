@@ -6,44 +6,14 @@ import org.json.simple.JSONObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.Collection;
+import java.util.List;
 
 /**
- * Root resource (exposed at "myresource" path)
+ * Root resource
  */
 @Path("adressBook/")
-public class MyResource {
+public class ContactsResource {
 
-    /**
-     * Method handling HTTP GET requests. The returned object will be sent
-     * to the client as "text/plain" media type.
-     *
-     * @return String that will be returned as a text/plain response.
-     */
-    @GET
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getIt() {
-        return "Got it!";
-    }
-
-
-//
-//    @GET
-//    @Path("test/{id}")
-//    @Produces(MediaType.APPLICATION_JSON)
-//    public String getCustomer(@PathParam("id") Integer id) {
-//        JSONObject obj = new JSONObject();
-//        obj.put("name", "mkyong.com");
-//        obj.put("age", new Integer(id));
-//
-//        JSONArray list = new JSONArray();
-//        list.add("msg 1");
-//        list.add("msg 2");
-//        list.add("msg 3");
-//
-//        obj.put("messages", list);
-//        String obj2 = obj.toJSONString();
-//        return obj2;
-//    }
 
     /**
      * method to return all contacts either from DB or cached
@@ -55,27 +25,6 @@ public class MyResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getContacts() {
         JSONArray array = new JSONArray();
-//        Contact test = new Contact();
-//        test.setId(1);
-//        test.setForename("Daniel");
-//        test.setName("R");
-//        test.setMobile("01764569112");
-//        test.setEmail("dan@dan.de");
-//        array.add(test.toJson());
-//        Contact test2 = new Contact();
-//        test2.setId(2);
-//        test2.setForename("Daniela");
-//        test2.setName("L");
-//        test2.setWork("+493514569112");
-//        test2.setEmail("dan@dan.com");
-//        array.add(test2.toJson());
-//        HashMap<Integer, Contact> contactsById = databaseManager.tryDBConnection();
-//        for (Map.Entry<Integer, Contact> entry : contactsById.entrySet()) {
-//            System.out.println("Key = " + entry.getKey() + ", Value = " + entry.getValue());
-//            array.add(entry.getValue().toJson());
-////            array.add(contactsById.values());
-//        }
-
         Collection<Contact> contacts = ContactManager.getInstance().getAllContacts();
         for (Contact contact : contacts) {
             array.add(contact.toJson());
@@ -98,16 +47,7 @@ public class MyResource {
     @Path("contacts/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String getContact(@PathParam("id") Integer id) {
-//        JSONArray array = new JSONArray();
-//        Contact test = new Contact();
-//        test.setId(1);
-//        test.setForename("Daniel");
-//        test.setName("R");
-//        test.setMobile("01764569112");
-//        test.setEmail("dan@dan.de");
-////        array.add(test.toJson());
-//        HashMap<Integer, Contact> contactsById = databaseManager.tryDBConnection();
-//        Contact contact = contactsById.get(id);
+
 
         Contact contact = ContactManager.getInstance().getContact(id);
         if (contact != null) {
@@ -123,14 +63,7 @@ public class MyResource {
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
     public String addContact(@FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
-//        JSONArray array = new JSONArray();
-//        Contact test = new Contact();
-//        test.setId(1);
-//        test.setForename("Daniel");
-//        test.setName("R");
-//        test.setMobile("01764569112");
-//        test.setEmail("dan@dan.de");
-////        array.add(test.toJson());
+
         //nächst mögliche id? per property, die hier hochzählt?, und die letzt höchste beim initialisieren bekommt als wert
         JSONObject json = new JSONObject();
         if (name != null && forename != null && email != null) {
@@ -181,33 +114,7 @@ public class MyResource {
     @Path("delete/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public String deleteContact(@PathParam("id") Integer id) {
-//        JSONArray array = new JSONArray();
-//        Contact test = new Contact();
-//        test.setId(1);
-//        test.setForename("Daniel");
-//        test.setName("R");
-//        test.setMobile("01764569112");
-//        test.setEmail("dan@dan.de");
-////        array.add(test.toJson());
-        //nächst mögliche id? per property, die hier hochzählt?, und die letzt höchste beim initialisieren bekommt als wert
-//        JSONObject json = new JSONObject();
-//        if (name != null && forename != null && email != null) {
-//            Contact contact = new Contact(20, forename, name, email, mobile, work, adress, town, zip);
-//
-//
-//            boolean completed = databaseManager.getInstance().addEntry(contact);
-//
-//
-//            if (completed) {
-//                ContactManager.getInstance().refreshCache();
-//                return contact.toJsonString();
-////                json.put("", "added entry");
-//            } else {
-//                json.put("error", "no key with that id");
-//            }
-//        }
-//
-//        return json.toJSONString();
+
         JSONObject json = new JSONObject();
         boolean completed = ContactManager.getInstance().deleteContact(id);
         if (completed) {
@@ -228,6 +135,22 @@ public class MyResource {
             json.put("task", "success");
         } else {
             json.put("task", "error");
+        }
+        return json.toJSONString();
+    }
+
+    @GET
+    @Path("contactSearch")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String searchContacts(@QueryParam("ss") String searchString) {
+        JSONObject json = new JSONObject();
+        List<Contact> contacts = ContactManager.getInstance().searchForContact(searchString);
+        JSONArray array = new JSONArray();
+        if (array != null) {
+            for (Contact contact : contacts) {
+                array.add(contact.toJson());
+            }
+            return array.toJSONString();
         }
         return json.toJSONString();
     }

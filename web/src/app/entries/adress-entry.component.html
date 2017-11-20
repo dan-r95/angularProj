@@ -1,41 +1,44 @@
 <div class="row">
   <div class=' col-md-offset-4 col-md-4' style='text-align: center'>
-    <h4> <mat-icon>contacts</mat-icon> Alle Kontakte</h4>
+    <h4>
+      <mat-icon>contacts</mat-icon>
+      Alle Kontakte
+    </h4>
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' />
+        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' id="searchField"
+               (keyup)="search()" [formControl]="autoControl" [matAutocomplete]="searchResults"/>
       </mat-form-field>
+      <mat-autocomplete #searchResults="matAutocomplete">
+        <mat-option *ngFor="let entry of entries$ | async" [value]="option" routerLink="/adressDetail/{{entry.id}}">
+          {{entry.forename + " " + entry.name}}
+        </mat-option>
+      </mat-autocomplete>
     </form>
+
     <div class="row">
-      <div class="col-md-6 col-xs-6 col-sm-6 adressBox" *ngFor="let entry of entries | searchFilter:searchBar |slice:pageIndex*pageSize:(pageIndex+1)*pageSize">
-        <!-- | slice:0:2 -->
+      <div class="col-md-6 col-xs-6 col-sm-6 adressBox"
+           *ngFor="let entry of entries  | slice:pageIndex*pageSize : (pageIndex+1)*pageSize">
+        <!-- searchFilter:searchBar | slice:0:2 -->
         <div class="topDiv" routerLink="/adressDetail/{{entry.id}}">
           <h5>{{entry.forename | slice:0:8}} {{entry.forename.length > 8 ? '...':''}} </h5>
-          <h4>{{entry.name |  slice:0:8 }} {{entry.name.length > 8 ? '...':''}} </h4>
+          <h4>{{entry.name | slice:0:8 }} {{entry.name.length > 8 ? '...':''}} </h4>
           <div *ngIf="entry.mobile">
-            <mat-icon>smartphone</mat-icon> {{entry.mobile}}
+            <mat-icon>smartphone</mat-icon>
+            {{entry.mobile}}
           </div>
-          <!-- pageIndex*pageSize:pageIndex+1*pageSize  -->
         </div>
 
         <div class="downDiv" class="action-buttons">
           <!-- <mat-card-actions> -->
-          <button mat-mini-fab color="primary"><mat-icon (click)="editEntry(entry)">edit</mat-icon></button>
-          <button mat-mini-fab color="primary">  <mat-icon (click)="openConfirmDialog(entry)">delete</mat-icon></button>
-          <!-- </mat-card-actions> -->
+          <button mat-mini-fab color="primary">
+            <mat-icon (click)="editEntry(entry)">edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="primary">
+            <mat-icon (click)="openConfirmDialog(entry)">delete</mat-icon>
+          </button>
         </div>
 
-
-        <!-- <md-icon md-font-icon="android" alt="android"></md-icon>
-      <md-icon md-font-library="material-icons">face</md-icon>
-      <mat-icon svgIcon="home"></mat-icon>
-      <mat-icon>home</mat-icon>
-      <button mat-icon-button color="primary">
-      <mat-icon svgIcon="mode-edit"></mat-icon>
-    </button>
-    <button mat-icon-button color="primary">
-    <mat-icon svgIcon="delete"></mat-icon>
-  </button> -->
       </div>
     </div>
     <div *ngIf="pageEvent">
@@ -44,13 +47,15 @@
       <div>Page size: {{pageEvent.pageSize}}</div>
       <div>Page index: {{pageEvent.pageIndex}}</div>
     </div>
-    <mat-paginator *ngIf="entries" [length]="length" [pageSize]="5" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 50]" (page)="pageEvent = getAllEntries($event)">
+    <mat-paginator *ngIf="entries" [length]="length" [pageSize]="5" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 50]"
+                   (page)="pageEvent = getAllEntries($event)">
     </mat-paginator>
     <div>
-      <button mat-mini-fab color="primary" (click)="openDialog()"><mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon></button>
+      <button mat-mini-fab color="primary" (click)="openDialog()">
+        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      </button>
 
 
     </div>
   </div>
-  <!-- snackbar on creation-->
-  <!--add entry -->
+</div>

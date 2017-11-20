@@ -13,7 +13,8 @@ public class Contact {
     private String work;
     private String email;
 
-    public Contact(){}
+    public Contact() {
+    }
 
     public Contact(Integer id, String forename, String name, String email, String mobile, String work, String adress, String town, String zip) {
         setId(id);

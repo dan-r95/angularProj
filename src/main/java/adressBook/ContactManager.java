@@ -2,6 +2,9 @@ package adressBook;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ContactManager {
 
@@ -24,7 +27,7 @@ public class ContactManager {
             }
 
         } else {
-            cachedContacts = databaseManager.getInstance().tryDBConnection();
+            cachedContacts = DatabaseManager.getInstance().tryDBConnection();
             Contact contact = cachedContacts.get(id);
             if (contact != null) {
                 return contact;
@@ -39,7 +42,7 @@ public class ContactManager {
             return cachedContacts.values();  //(Contact[]) .toArray();
 
         } else {
-            cachedContacts = databaseManager.getInstance().tryDBConnection();
+            cachedContacts = DatabaseManager.getInstance().tryDBConnection();
             if (cachedContacts != null) {
                 return cachedContacts.values();  // (Contact[]) .toArray();
             }
@@ -48,39 +51,65 @@ public class ContactManager {
     }
 
 
-    public boolean refreshCache(){
-        cachedContacts = databaseManager.getInstance().tryDBConnection();
+    public boolean refreshCache() {
+        cachedContacts = DatabaseManager.getInstance().tryDBConnection();
         if (cachedContacts != null) {
             return true;
         }
         return false;
     }
 
-    public Integer addContact(Contact contact){
-        Integer completed= databaseManager.getInstance().addEntry(contact);
-        cachedContacts = databaseManager.getInstance().tryDBConnection();
+    public Integer addContact(Contact contact) {
+        Integer completed = DatabaseManager.getInstance().addEntry(contact);
+        cachedContacts = DatabaseManager.getInstance().tryDBConnection();
         return completed;
     }
 
 
-    public boolean updateContact(Contact contact){
-        boolean completed= databaseManager.getInstance().updateEntry(contact);
-        cachedContacts = databaseManager.getInstance().tryDBConnection();
+    public boolean updateContact(Contact contact) {
+        boolean completed = DatabaseManager.getInstance().updateEntry(contact);
+        cachedContacts = DatabaseManager.getInstance().tryDBConnection();
         return completed;
     }
 
-    public boolean deleteContact(Integer id){
-        boolean completed= databaseManager.getInstance().deleteEntry(id);
-        cachedContacts = databaseManager.getInstance().tryDBConnection();
+    public boolean deleteContact(Integer id) {
+        boolean completed = DatabaseManager.getInstance().deleteEntry(id);
+        cachedContacts = DatabaseManager.getInstance().tryDBConnection();
         return completed;
     }
 
-    public boolean deleteAllContacts(){
-        boolean completed= databaseManager.getInstance().deleteAll();
-        cachedContacts = databaseManager.getInstance().tryDBConnection();
+    public boolean deleteAllContacts() {
+        boolean completed = DatabaseManager.getInstance().deleteAll();
+        cachedContacts = DatabaseManager.getInstance().tryDBConnection();
         return completed;
     }
 
+    /**
+     * for complexity's sake - just look for matches in forename and name
+     *
+     * @param ss
+     * @return
+     */
+    public List<Contact> searchForContact(String ss) {
+        // just search the cache, not the DB
+        if (cachedContacts != null) {
+            final String searchString = ss.toLowerCase();
+            Stream<Contact> stream = cachedContacts.values().stream().filter(e -> e.getName().toLowerCase().contains(searchString) ||
+                    e.getForename().toLowerCase().contains(searchString));
+            List<Contact> list = stream.collect(Collectors.toList());
+            return list;
 
+
+// forEach(e -> {
+//                        Contact c = e.getValue();
+//                        int tot = v.entrySet().stream()
+//                                .reduce(0, (x, ee) -> x + ee.getValue(), (x, y) -> x+y);
+//                        v.put(0, tot);
+//                    });
+//        }
+
+        }
+        return null;
+    }
 
 }

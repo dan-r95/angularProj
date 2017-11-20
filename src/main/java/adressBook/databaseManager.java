@@ -3,7 +3,7 @@ package adressBook;
 import java.sql.*;
 import java.util.HashMap;
 
-public class databaseManager {
+public class DatabaseManager {
 
 
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
@@ -14,13 +14,13 @@ public class databaseManager {
     static final String PASS = "";
 
 
-    private static final databaseManager instance = new databaseManager();
+    private static final DatabaseManager instance = new DatabaseManager();
 
-    public static databaseManager getInstance() {
+    public static DatabaseManager getInstance() {
         return instance;
     }
 
-    private databaseManager() {
+    private DatabaseManager() {
     }
 
 
@@ -387,7 +387,7 @@ public class databaseManager {
     }
 
     public static void main(String[] args) {
-        databaseManager.getInstance().tryDBConnection();
+        DatabaseManager.getInstance().tryDBConnection();
     }
 
 }

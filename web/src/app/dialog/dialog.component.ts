@@ -1,11 +1,10 @@
-import { Component, OnInit, Inject, ChangeDetectorRef } from '@angular/core';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { ErrorStateMatcher } from '@angular/material/core';
-// import {FormControl, Validators} from '@angular/forms';
+import {Component, OnInit, Inject, ChangeDetectorRef} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
+import {ErrorStateMatcher} from '@angular/material/core';
 
-import { Entry } from '../entry';
-import { SnackbarComponent } from '../snackbar/snackbar.component'
+import {Entry} from '../entry';
+import {SnackbarComponent} from '../snackbar/snackbar.component'
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -22,25 +21,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class DialogComponent implements OnInit {
   entry: Entry;
-  email: string;
-  name: string;
-  forename: string;
-  adress?: string;
-  work?: string;
-  mobile?: string;
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar, private cdr: ChangeDetectorRef) { }
+  constructor(public dialogRef: MatDialogRef<DialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar, private cdr: ChangeDetectorRef) {
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   openSnackBar() {
-    // this.snackBar.openFromComponent(SnackbarComponent, {
-    //   duration: 500,
-    // });
     let config = new MatSnackBarConfig();
     config.duration = 1000;
     this.snackBar.open("Bitte geforderte Felder angeben", null, config);
@@ -48,9 +38,6 @@ export class DialogComponent implements OnInit {
 
   addEntry(): void {
     if (this.entry.email && this.entry.name && this.entry.forename) {
-      // this.entry.email = this.email;
-      // this.entry.name = this.name;
-      // this.entry.forename = this.forename;
       this.dialogRef.close(this.entry);
     }
     else {
@@ -59,13 +46,6 @@ export class DialogComponent implements OnInit {
 
   }
 
-  // email = new FormControl('', [Validators.required, Validators.email]);
-  //
-  // getErrorMessage() {
-  //   return this.email.hasError('required') ? 'You must enter a value' :
-  //   this.email.hasError('email') ? 'Not a valid email' :
-  //   '';
-  // }
 
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -77,19 +57,10 @@ export class DialogComponent implements OnInit {
 
   ngOnInit() {
 
-    // }
-    // ngAfterViewInit() {
-    console.log(this.data);
     if (this.data && this.data.entry) {
-      // this.entry = new Entry();
       this.entry = this.data.entry;
-      console.log(this.entry)
-      // this.cdr.markForCheck();
-      // this.cdr.detectChanges();
     } else {
       this.entry = new Entry();
-      // }
-
     }
 
   }

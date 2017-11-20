@@ -1,15 +1,9 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <!-- <img [src]="source" /> -->
-
   <mat-toolbar color="primary">
-    <!-- <span>Custom Toolbar</span> -->
-    <!-- <span>Second Line</span> -->
     <span><nav>
       <a routerLink="/adresses"><mat-icon class="header-link">home</mat-icon></a>
     </nav></span>
     <span class="example-spacer"></span>
-    <!-- <mat-icon class="example-icon">verified_user</mat-icon> -->
     <span><button mat-icon-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
     </button></span>
@@ -21,17 +15,6 @@
     </mat-menu>
     <span> <a class="header-link" [href]="angularDocsUrl">Github</a> </span>
 
-
-    <!-- <mat-toolbar-row> -->
-
-    <!-- </mat-toolbar-row>
-
-    <mat-toolbar-row>
-      <span>Third Line</span>
-      <span class="example-spacer"></span>
-      <mat-icon class="example-icon">favorite</mat-icon>
-      <mat-icon class="example-icon">delete</mat-icon>
-    </mat-toolbar-row> -->
   </mat-toolbar>
   <h2>
   Mein Adressbuch
@@ -39,48 +22,4 @@
 
   <router-outlet></router-outlet>
 </div>
-<!-- <h2>Here are some links to help you start: </h2>
-<ul>
-<li>
-<h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-</li>
-<li>
-<h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-</li>
-<li>
-<h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-</li>
-</ul> -->
 
-
-<!-- <h4 [hidden]="!favoriteHero">Ich habe eingetragen: {{favoriteHero}}</h4>
-
-<button class="btn btn-primary">Test Button</button> <br />
-<i class="fa fa-check"></i> <br />
-<button mat-raised-button color="primary">Primary</button>
-
-
-<tr *ngFor="let movie of movies  | slice:0:2">
-  <td>{{movie.title}}</td>
-</tr>
-
-
-<button (click)="toggleImage()">
-
-
-
-  <mat-form-field class="example-full-width">
-    <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker" placeholder="Choose a date">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field> -->
-
-
-
-<!-- no orderby or custom filters allowed, define in component -->
-
-<!-- You write Angular applications by composing HTML templates with Angularized markup,
-  writing component classes to manage those templates, adding application logic in services,
-  and boxing components and services in modules.  -->
-
-<!-- The JavaScript (+) operator converts the string to a number, which is what a hero id should be. -->

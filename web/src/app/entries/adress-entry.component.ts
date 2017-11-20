@@ -1,11 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { Entry } from '../entry';
-import { AdressManagementService } from '../adress.service';
-import { DataProviderService } from '../data-provider.service';
-import { DialogComponent } from '../dialog/dialog.component';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import {Component, OnInit, Inject} from '@angular/core';
+import {Entry} from '../entry';
+import {AdressManagementService} from '../adress.service';
+import {DialogComponent} from '../dialog/dialog.component';
+import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {Observable} from "rxjs/Observable";
+import {Subject} from "rxjs/Subject";
+import {
+  debounceTime, distinctUntilChanged, switchMap
+} from 'rxjs/operators';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'selector',
@@ -14,62 +19,65 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSn
 })
 export class adressEntriesComponent implements OnInit {
   entries: Entry[];
+  entries$: Observable<Entry[]>;
   selectedEntry: Entry;
   searchBar: string;
   pageEvent: PageEvent;
   pageIndex = 0;
   length = 100;
   pageSize = 4;
-  pageSizeOptions = [5, 10, 25, 100];
+  // pageSizeOptions = [5, 10, 25, 100];
+  autoControl: FormControl = new FormControl();
+  private searchTerms = new Subject<string>();
 
-  constructor(private adressService: AdressManagementService, private dataService: DataProviderService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
+  constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
     this.getAllEntries();
+
+    this.entries$ = this.searchTerms.pipe(
+      // wait some time after each keystroke
+      debounceTime(200),
+
+      // ignore new term if same as previous term
+      distinctUntilChanged(),
+
+      // switch to new search observable each time the term changes
+      switchMap((term: string) => this.adressService.searchEntry(term)),
+    );
   }
 
   getAllEntries(event?: PageEvent): void {
     this.adressService.getEntries(event).subscribe(data => {
-      // Read the result field from the JSON response.
-      // this.results = data['results'];
-      if (event) {
-        this.pageIndex = event.pageIndex;
-        this.pageSize = event.pageSize;
-      }
-      this.entries = data;
-      this.length = data.length;
-      console.log(data),
-        // Errors will call this callback instead:
-        err => {
-          console.log('Something went wrong!');
+        if (event) {
+          this.pageIndex = event.pageIndex;
+          this.pageSize = event.pageSize;
         }
-    });
-    // console.log(event);
-    // this.adressService.getEntries(event)
-    //   .subscribe(entries => {
-    //     console.log(event);
-    //     if (event) {
-    //       this.pageIndex = event.pageIndex;
-    //       this.pageSize = event.pageSize;
-    //     }
-    //     this.entries = entries;
-    //     this.length = entries.length;
-    //
-    //   });
+        this.entries = data;
+        this.length = data.length;
+      },
+      err => {
+        this.openSnackBar("Server-Fehler");
+      }
+    );
   }
-  selectEntry(entry: Entry) { this.selectedEntry = entry; }
+
+  selectEntry(entry: Entry) {
+    this.selectedEntry = entry;
+  }
 
   addEntry(name: string): void {
     name = name.trim();
-    if (!name) { return; }
-    this.adressService.addEntry({ name } as Entry)
+    if (!name) {
+      return;
+    }
+    this.adressService.addEntry({name} as Entry)
       .subscribe(entry => {
-          console.log(entry);
-        // if(error){
-        //   this.openSnackBar("Serverseitiger Fehler :/");
-        // } else{
+        console.log(entry);
         this.entries.push(entry);
-      // }
+      }, err => {
+        this.openSnackBar("Server-Fehler");
       });
   }
 
@@ -81,13 +89,15 @@ export class adressEntriesComponent implements OnInit {
   editEntry(entry: Entry): void {
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { entry: entry }
+      data: {entry: entry}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.adressService.updateEntry(result).subscribe(result => this.openSnackBar("Eintrag aktualisiert"))
         console.log('edit result');
       }
+    }, err => {
+      this.openSnackBar("Server-Fehler");
     });
   }
 
@@ -101,7 +111,8 @@ export class adressEntriesComponent implements OnInit {
         this.openSnackBar("Eintrag entfernt");
 
       }
-      console.log('The dialog was closed');
+    }, err => {
+      this.openSnackBar("Server-Fehler");
     });
   }
 
@@ -109,24 +120,23 @@ export class adressEntriesComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: { selectedEntry: this.selectedEntry }
+      data: {selectedEntry: this.selectedEntry}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
       if (result) {
-        console.log(result);
         this.adressService.addEntry(result)    // as Entry
           .subscribe(entry => {
             this.entries.push(entry);
             this.openSnackBar("Eintrag hinzugefügt");
           });
       }
-
-
-      console.log('The dialog was closed');
-      console.log(result);
     });
+  }
+
+  search(): void {  //search: string
+    this.searchTerms.next(this.searchBar);  //term
   }
 
   openSnackBar(msg: string) {
