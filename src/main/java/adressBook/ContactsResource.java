@@ -14,6 +14,12 @@ import java.util.List;
 @Path("adressBook/")
 public class ContactsResource {
 
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getIt() {
+        return "Got it!";
+    }
+
 
     /**
      * method to return all contacts either from DB or cached
