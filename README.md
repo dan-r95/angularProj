@@ -4,7 +4,7 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0.
 
-This project represents a digital adressbook which shows presents contacts set by the user. The user can add contacts and delete or edit existing ones. A useful search interface makes it easy to find an entry the user is looking for.
+This project represents a digital adressbook which displays contacts set by the user. The user can add contacts and delete or edit existing ones. A useful search interface makes it easy to find an entry the user is looking for. A method can delete all contacts.
 
 
 # Dev
@@ -34,7 +34,7 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). -->
 
-## Configuration 
+## Configuration
 you can edit the path of the database in the databasemanager (DB_URL).
 port and URL of the servlet can be configured in `Servlet` (BASE_URI)
 
