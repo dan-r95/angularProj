@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This project represents a digital adressbook which shows presents contacts set by the user. The user can add contacts and delete or edit existing ones. A useful search interface makes it easy to find an entry the user is looking for.
 
 
-# Development server
+# Dev
 
 ### Frontend
 Run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -34,9 +34,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/). -->
 
-## Configuration / Useful
+## Configuration 
 you can edit the path of the database in the databasemanager (DB_URL).
-port and URL of the servlet can be configured in Servlet (BASE_URI)
+port and URL of the servlet can be configured in `Servlet` (BASE_URI)
 
 Communication in dev mode is configured via a proxy in
 ```
@@ -47,7 +47,7 @@ adressBook
 ```
 and package.json is modified.
 
-## Architecture
+# Architecture
 dependencies are being managed via maven in `pom.xml` under <dependencies>
 
 
@@ -60,18 +60,21 @@ adressBook
 ```
 
 ## Backend
-All files can be found inside the src folder.
+All files can be found inside the `src` folder.
+sources files: `main`, test files: `test`
 
-### data resource
+### ContactsResource
 the resource only serves as a communication interface and has no business logic
 
-### contactmanager
-the contact manager is responsible for the hashmap including all contacts and updating it when needed
+### ContactManager
+the contact manager is responsible for the hashmap including all contacts and updating it when needed (gets updated data from the `DatabaseManager`)
 
 
-### datamanager
-the `data manager` manages the contacts inside a cache (hashmap) or gets updated data from the `databasemanager`
-the databasemanager  connects to a mysql database which is required for this programm to run
+### DatabaseManager
+the manager  connects to a mysql database which is required for this programm to run
+
+### Servlet
+This class is required to run the grizzly framework.
 
 
 ### Contact
@@ -79,26 +82,33 @@ this class has a number of variables which model the typical properties of a adr
 these variables are accessible by getter and setter methods.
 
 ## Angular
-the Angular app consists of multiple components and a service which deals with connecting to the database and performs requests.
-All files can be found in the web folder.
+the Angular app consists of multiple components (`AdressEntriesComponent`,`AdressDetailComponent`, `ConfirmDialogComponent`, `DialogComponent` ) and a service `AdressManagementService` which deals with connecting to the database and performs requests.
+
+A routing module `AppRoutingModule` takes care of navigation between different views, here the detail view of a contact and the all contacts view.
+
+All imports are managed in the main `AppModule`.
+All files can be found in the `web` folder.
 
 
-
-## Dependencies
+# Dependencies
 A MySQL database is required on the specified path: `jdbc:mysql://localhost/contacts`
+
 A sample database can be found in `db/contacts.sql`
 Use xampp with phpmyadmin for example for an easy db setup.
 
-maven is required to run the grizzly web framework and other dependencies
+Maven is required to run the grizzly web framework and other dependencies.
 
 Run `mvn -v` to ensure that maven is correctly installed and added to the `PATH` variable.
 
-Angular Version 4.4, hence only typescript 2.3.4 is supported. See all package versions in:
+The App uses Angular Version 4.4, hence only typescript 2.3.4 is supported. See all package versions in:
 ```
 adressBook
 │   README.md
 │   package.json  
 ```
+
 The project uses npm as the packet manager.
  Run `npm -v` to verify the installation.
- Run `npm install` in the current working directory to install all required dependecies.
+ Run `npm install` in the current working directory to install all required packages.
+
+ The frontend uses Angular Material and Bootstrap.
