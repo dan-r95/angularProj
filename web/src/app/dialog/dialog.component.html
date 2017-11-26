@@ -1,8 +1,8 @@
 <div class="dialog">
 
-  <p>
-    Neuen Kontakt hinzufügen
-  </p>
+  <h4>
+    Neuen Kontakt hinzufügen oder bearbeiten
+  </h4>
 
 
   <form class="example-form">
@@ -50,6 +50,9 @@
       </tr>
     </table>
   </form>
-  <button style="float:right" mat-button color="primary" (click)="addEntry()">Hinzufügen</button>
+  <button mat-icon-button color="primary" style="float:right" (click)="addEntry()">
+    <mat-icon>send</mat-icon>
+  </button>
+  <!--<button style="float:right" mat-button color="primary" (click)="addEntry()">Hinzufügen</button>-->
 
 </div>

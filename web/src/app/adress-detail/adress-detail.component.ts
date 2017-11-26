@@ -48,7 +48,7 @@ export class AdressDetailComponent implements OnInit {
 
   editEntry(entry: Entry): void {
     let dialogRef = this.dialog.open(DialogComponent, {
-      width: '250px',
+      width: '280px',
       data: {entry: entry}
     });
     dialogRef.afterClosed().subscribe(result => {

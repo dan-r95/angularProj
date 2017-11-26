@@ -1,4 +1,17 @@
 .dialog {
   padding: 5px;
   text-align: center;
+  height: 110px;
+}
+
+h4 {
+  color: #369;
+}
+
+.topDiv{
+  height: 60%;
+}
+
+.downDiv{
+  height: 40%;
 }
