@@ -5,8 +5,7 @@ import {DialogComponent} from '../dialog/dialog.component';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig} from '@angular/material';
-import {Observable} from "rxjs/Observable";
-import {Subject} from "rxjs/Subject";
+import {Observable, Subject} from "rxjs";
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
