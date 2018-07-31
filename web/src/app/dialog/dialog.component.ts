@@ -52,6 +52,8 @@ export class DialogComponent implements OnInit {
     Validators.email,
   ]);
 
+  //setValue() { this.emailFormControl.setValue('new value'); }
+
   matcher = new MyErrorStateMatcher();
 
 
