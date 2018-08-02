@@ -1,25 +1,17 @@
-<div style="text-align:center">
-  <mat-toolbar color="primary">
-    <span><nav>
-      <a routerLink="/adresses"><mat-icon class="header-link">home</mat-icon></a>
-    </nav></span>
-    <span class="example-spacer"></span>
-    <span><button mat-icon-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-    </button></span>
-    <mat-menu #menu="matMenu">
+<!-- <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="openConfirmDialog()">
         <mat-icon>cached</mat-icon>
         <span >Reset</span>
       </button>
-    </mat-menu>
-    <span> <a class="header-link" [href]="angularDocsUrl">Github</a> </span>
+    </mat-menu> -->
+<div style="text-align:center">
 
-  </mat-toolbar>
+
+  <app-navbar></app-navbar>
+
   <h2>
   Mein Adressbuch
   </h2>
 
   <router-outlet></router-outlet>
 </div>
-

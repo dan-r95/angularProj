@@ -1,15 +1,15 @@
-import {Component, OnInit, Inject} from '@angular/core';
-import {Entry} from '../entry';
-import {AdressManagementService} from '../adress.service';
-import {DialogComponent} from '../dialog/dialog.component';
-import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import { Component, OnInit } from '@angular/core';
+import { Entry } from '../entry';
+import { AdressManagementService } from '../adress.service';
+import { DialogComponent } from '../dialog/dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig} from '@angular/material';
-import {Observable, Subject} from "rxjs";
+import { MatDialog, PageEvent, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { Observable, Subject } from "rxjs";
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
-import {FormControl} from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'selector',
@@ -49,13 +49,13 @@ export class adressEntriesComponent implements OnInit {
 
   getAllEntries(event?: PageEvent): void {
     this.adressService.getEntries(event).subscribe(data => {
-        if (event) {
-          this.pageIndex = event.pageIndex;
-          this.pageSize = event.pageSize;
-        }
-        this.entries = data;
-        this.length = data.length;
-      },
+      if (event) {
+        this.pageIndex = event.pageIndex;
+        this.pageSize = event.pageSize;
+      }
+      this.entries = data;
+      this.length = data.length;
+    },
       err => {
         this.openSnackBar("Server-Fehler");
       }
@@ -71,7 +71,7 @@ export class adressEntriesComponent implements OnInit {
     if (!name) {
       return;
     }
-    this.adressService.addEntry({name} as Entry)
+    this.adressService.addEntry({ name } as Entry)
       .subscribe(entry => {
         console.log(entry);
         this.entries.push(entry);
@@ -88,7 +88,7 @@ export class adressEntriesComponent implements OnInit {
   editEntry(entry: Entry): void {
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '280px',
-      data: {entry: entry}
+      data: { entry: entry }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -119,7 +119,7 @@ export class adressEntriesComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
-      data: {selectedEntry: this.selectedEntry}
+      data: { selectedEntry: this.selectedEntry }
     });
 
     dialogRef.afterClosed().subscribe(result => {

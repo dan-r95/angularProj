@@ -1,11 +1,15 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 
-import {AdressManagementService} from './adress.service';
-import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component'
+import { AdressManagementService } from './adress.service';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
 
-import {MatDialog , MatSnackBar, MatSnackBarConfig} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
+import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { Location } from '@angular/common';
+
+
+
+
+
 
 @Component({
   selector: 'app-root',
@@ -13,11 +17,19 @@ import {Location} from '@angular/common';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  color = 'accent';
+  mode = 'indeterminate';
+  value = 50;
+
   angularDocsUrl = "https://github.com/rossy95/angularProj"
 
+
+
   constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar,
-              private route: ActivatedRoute, private location: Location) {
+    private location: Location, ) {
+
   }
+
 
   deleteAll(): void {
     this.adressService.deleteAll().subscribe();
