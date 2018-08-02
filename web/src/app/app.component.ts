@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
-import {MatIconRegistry} from '@angular/material';
 
 import {AdressManagementService} from './adress.service';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component'
 
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, PageEvent, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {MatDialog , MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {ActivatedRoute} from '@angular/router';
 import {Location} from '@angular/common';
 

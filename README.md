@@ -7,6 +7,12 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 This project represents a digital adressbook which displays contacts set by the user. The user can add contacts and delete or edit existing ones. A useful search interface makes it easy to find an entry the user is looking for. A method can delete all contacts.
 
 
+# Install
+* Maven and npm are required.
+* Run `mvn -v` to ensure that maven is correctly installed and added to the `PATH` variable.
+* Run `npm -v` to ensure that node package manager is correctly installed.
+* Run `npm install` from the `web`` subdirectory to install the required packages.
+
 # Dev
 
 ### Frontend
@@ -57,7 +63,6 @@ Use "xampp" with phpmyadmin for example under windows for an easy db setup or "m
 
 Maven is required to run the grizzly web framework and other dependencies.
 
-Run `mvn -v` to ensure that maven is correctly installed and added to the `PATH` variable.
 
 See all package versions in:
 ```

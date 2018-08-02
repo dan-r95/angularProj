@@ -1,10 +1,10 @@
-import {Component, OnInit, Inject, ChangeDetectorRef} from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {Component, OnInit, Inject} from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
 
 import {Entry} from '../entry';
-import {SnackbarComponent} from '../snackbar/snackbar.component'
+
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -23,7 +23,7 @@ export class DialogComponent implements OnInit {
   entry: Entry;
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar, private cdr: ChangeDetectorRef) {
+              @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar) {
   }
 
   onNoClick(): void {

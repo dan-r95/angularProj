@@ -14,23 +14,25 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
   MatPaginatorModule, MatIconModule, MatFormFieldModule, MatCardModule,
-  MatToolbarModule, MatSnackBarModule, MatMenuModule, MatAutocompleteModule
+  MatToolbarModule, MatSnackBarModule, MatMenuModule, MatAutocompleteModule,MatStepperModule, MatProgressSpinnerModule
 } from '@angular/material';
 
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './/app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
+import { LoginComponent } from './login/login.component';
+import { RegistrationComponent } from './registration/registration.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent, adressEntriesComponent, EntryPipe, AdressDetailComponent, DialogComponent, ConfirmDialogComponent, SnackbarComponent
+    AppComponent, adressEntriesComponent, EntryPipe, AdressDetailComponent, DialogComponent, ConfirmDialogComponent, SnackbarComponent, LoginComponent, RegistrationComponent
   ],
   imports: [
     BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
     BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
     AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
-    MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule
+    MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, MatStepperModule, MatProgressSpinnerModule
   ],
   providers: [AdressManagementService],
   bootstrap: [AppComponent],

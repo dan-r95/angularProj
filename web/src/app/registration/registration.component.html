@@ -1,0 +1,43 @@
+<div class="row">
+  <div class=' col-md-offset-3 col-md-6' style='text-align: center'>
+    <mat-horizontal-stepper #stepper>
+      <mat-step [stepControl]="firstFormGroup">
+        <form [formGroup]="firstFormGroup">
+          <ng-template matStepLabel>Fill out your name</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="User Name" formControlName="firstCtrl" required>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperNext  [disabled]="">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step [stepControl]="secondFormGroup">
+        <form [formGroup]="secondFormGroup">
+          <ng-template matStepLabel>Fill out your email</ng-template>
+          <mat-form-field>
+            <input matInput placeholder="Email" [formControl]="emailFormControl" [errorStateMatcher]="matcher" required>
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+              Please enter a valid email address
+            </mat-error>
+            <mat-error *ngIf="emailFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button matStepperNext (click)="validate()" [disabled]="!emailFormControl.valid">Next</button>
+          </div>
+        </form>
+      </mat-step>
+      <mat-step>
+        <ng-template matStepLabel>Done</ng-template>
+        You are now done.
+        <div>
+          <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+          <button mat-raised-button color="primary" matStepperPrevious (click)="onSave()">Save</button>
+        </div>
+      </mat-step>
+    </mat-horizontal-stepper>
+  </div>
