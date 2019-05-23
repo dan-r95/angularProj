@@ -54,6 +54,8 @@ adressBook
 ```
 and package.json is modified.
 
+## Linting
+Run ```ng lint <project> --fix``` to fix code style issues.
 
 # Dependencies
 A MySQL database is required on the specified path: `jdbc:mysql://localhost/contacts`
