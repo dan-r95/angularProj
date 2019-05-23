@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 
-import {Observable} from 'rxjs/Rx';
-import {of} from 'rxjs';
+import {Observable, of} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {catchError, map, tap} from 'rxjs/operators';
 
 import {Entry} from './entry';
 
-//request body options
+// request body options
 const bodyOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
 };
@@ -26,7 +25,7 @@ export class AdressManagementService {
   private deleteUrl = 'api/adressBook/delete';
   private deleteAllUrl = 'api/adressBook/deleteAll';
   private updateUrl = 'api/adressBook/edit';
-  private searchUrl = 'api/adressBook/contactSearch'
+  private searchUrl = 'api/adressBook/contactSearch';
 
   constructor(private http: HttpClient) {
   }
@@ -37,7 +36,7 @@ export class AdressManagementService {
    * @returns {Observable<Entry[]>}
    */
   getEntries(event?: PageEvent): Observable<Entry[]> { //
-    console.log("getEntries");
+    console.log('getEntries');
     return this.http.get<Entry[]>(this.adressesUrl).pipe(
       catchError(this.handleError('getEntries', []))
     );
@@ -50,7 +49,7 @@ export class AdressManagementService {
    */
   getEntry(id: number): Observable<Entry> {
     const url = `${this.adressesUrl}/${id}`;
-    console.log("getEnty" + id);
+    console.log('getEnty' + id);
     return this.http.get<Entry>(url).pipe(
       catchError(this.handleError<Entry>(`getEntry id=${id}`))
     );
@@ -76,7 +75,7 @@ export class AdressManagementService {
     console.log(entry);
     console.log(bodyOptions);
 
-    let body = new URLSearchParams();
+    const body = new URLSearchParams();
     body.set('id', entry.id.toString());
     body.set('name', entry.name);
     body.set('forename', entry.forename);
@@ -96,7 +95,7 @@ export class AdressManagementService {
     if (entry.town) {
       body.set('town', entry.town);
     }
-    console.log("update" + entry);
+    console.log('update' + entry);
     return this.http.put(this.updateUrl, body.toString(), bodyOptions).pipe(
       catchError(this.handleError<any>('updateEntry'))
     );
@@ -109,7 +108,7 @@ export class AdressManagementService {
    */
   addEntry(entry: Entry): Observable<Entry> {
 
-    let body = new URLSearchParams();
+    const body = new URLSearchParams();
     body.set('name', entry.name);
     body.set('forename', entry.forename);
     body.set('email', entry.email);
@@ -129,10 +128,10 @@ export class AdressManagementService {
       body.set('town', entry.town);
     }
 
-    let options = {
+    const options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
-    console.log("add" + entry);
+    console.log('add' + entry);
     return this.http.post<Entry>(this.addUrl, body.toString(), options).pipe(
       catchError(this.handleError<Entry>('addEntry'))
     );
@@ -145,7 +144,7 @@ export class AdressManagementService {
    */
   deleteEntry(entry: Entry | number): Observable<Entry> {
     const id = typeof entry === 'number' ? entry : entry.id;
-    console.log("delete " + id);
+    console.log('delete ' + id);
     const url = `${this.deleteUrl}/${id}`;
 
     return this.http.delete<Entry>(url, httpOptions).pipe(
@@ -158,7 +157,7 @@ export class AdressManagementService {
    * @returns {Observable<any>}
    */
   deleteAll(): Observable<any> {
-    console.log("deleteAll");
+    console.log('deleteAll');
     return this.http.delete<Entry>(this.deleteAllUrl, httpOptions).pipe(
       catchError(this.handleError<Entry>('deleteEntry'))
     );
@@ -169,7 +168,7 @@ export class AdressManagementService {
     if (!searchString.trim()) {
       return of([]);
     }
-    console.log("search " + searchString);
+    console.log('search ' + searchString);
     return this.http.get<Entry[]>(this.searchUrl + `?ss=${searchString}`).pipe(
       catchError(this.handleError<Entry[]>('searchHeroes', []))
     );

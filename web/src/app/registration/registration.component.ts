@@ -17,10 +17,16 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
+  constructor(private _formBuilder: FormBuilder, private router: Router) { }
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  constructor(private _formBuilder: FormBuilder, private router: Router) { }
+    emailFormControl = new FormControl('', [
+      Validators.required,
+      Validators.email,
+    ]);
+
+  matcher = new MyErrorStateMatcher();
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -31,7 +37,7 @@ export class RegistrationComponent implements OnInit {
     });
 }
     onSave(): void {
-      this.router.navigate(["adresses"]);
+      this.router.navigate(['adresses']);
     }
 
     onDiscard(): void {
@@ -39,15 +45,9 @@ export class RegistrationComponent implements OnInit {
     }
 
     validate(): void {
-        if(!this.secondFormGroup.valid){
-  console.log("Not valid")
+        if (!this.secondFormGroup.valid) {
+  console.log('Not valid');
 }
 
     }
-    emailFormControl = new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ]);
-
-  matcher = new MyErrorStateMatcher();
 }

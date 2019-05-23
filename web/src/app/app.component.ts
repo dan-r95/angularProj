@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { AdressManagementService } from './adress.service';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component'
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { Location } from '@angular/common';
@@ -21,7 +21,7 @@ export class AppComponent {
   mode = 'indeterminate';
   value = 50;
 
-  angularDocsUrl = "https://github.com/rossy95/angularProj"
+  angularDocsUrl = 'https://github.com/rossy95/angularProj';
 
 
 
@@ -36,13 +36,13 @@ export class AppComponent {
   }
 
   openConfirmDialog(): void {
-    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteAll();
-        this.openSnackBar("Datenbank zurückgesetzt");
+        this.openSnackBar('Datenbank zurückgesetzt');
         this.location.back();
       }
 
@@ -51,7 +51,7 @@ export class AppComponent {
   }
 
   openSnackBar(msg: string) {
-    let config = new MatSnackBarConfig();
+    const config = new MatSnackBarConfig();
     config.duration = 1000;
     this.snackBar.open(msg, null, config);
   }

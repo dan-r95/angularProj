@@ -5,7 +5,7 @@ import {MatDialog, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
 import {Entry} from '../entry';
 import {AdressManagementService} from '../adress.service';
-import {DialogComponent} from '../dialog/dialog.component'
+import {DialogComponent} from '../dialog/dialog.component';
 import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
 
 
@@ -29,7 +29,7 @@ export class AdressDetailComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.adressService.getEntry(id)
       .subscribe(entry => this.entry = entry);
-    console.log(this.entry)
+    console.log(this.entry);
   }
 
   goBack(): void {
@@ -47,40 +47,40 @@ export class AdressDetailComponent implements OnInit {
   }
 
   editEntry(entry: Entry): void {
-    let dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '280px',
       data: {entry: entry}
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        console.log("edit - result");
+        console.log('edit - result');
         console.log(result);
-        this.adressService.updateEntry(result).subscribe(result => {
-            if (result) {
+        this.adressService.updateEntry(result).subscribe(data => {
+            if (data) {
               console.log('edit result');
-              this.openSnackBar("Eintrag aktualisiert");
+              this.openSnackBar('Eintrag aktualisiert');
             }
           }
-        )
+        );
 
       }
     });
   }
 
   openConfirmDialog(entry: Entry): void {
-    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteEntry(entry);
-        this.openSnackBar("Eintrag entfernt");
+        this.openSnackBar('Eintrag entfernt');
       }
     });
   }
 
   openSnackBar(msg: string) {
-    let config = new MatSnackBarConfig();
+    const config = new MatSnackBarConfig();
     config.duration = 1000;
     this.snackBar.open(msg, null, config);
   }

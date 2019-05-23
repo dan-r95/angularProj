@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   constructor() { }
-
-  ngOnInit() {
-  }
   color = 'primary';
   mode = 'indeterminate';
   value = 50;
+
+  ngOnInit() {
+  }
 }

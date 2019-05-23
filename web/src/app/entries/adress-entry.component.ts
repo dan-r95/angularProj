@@ -5,18 +5,18 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 import { MatDialog, PageEvent, MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { Observable, Subject } from "rxjs";
+import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'selector',
+  selector: 'app-adress-entry',
   templateUrl: 'adress-entry.component.html',
   styleUrls: ['./adress-entry.component.css']
 })
-export class adressEntriesComponent implements OnInit {
+export class AdressEntriesComponent implements OnInit {
   entries: Entry[];
   entries$: Observable<Entry[]>;
   selectedEntry: Entry;
@@ -57,7 +57,7 @@ export class adressEntriesComponent implements OnInit {
       this.length = data.length;
     },
       err => {
-        this.openSnackBar("Server-Fehler");
+        this.openSnackBar('Server-Fehler');
       }
     );
   }
@@ -76,48 +76,48 @@ export class adressEntriesComponent implements OnInit {
         console.log(entry);
         this.entries.push(entry);
       }, err => {
-        this.openSnackBar("Server-Fehler");
+        this.openSnackBar('Server-Fehler');
       });
   }
 
   deleteEntry(entry: Entry): void {
     this.entries = this.entries.filter(h => h !== entry);
-    this.adressService.deleteEntry(entry).subscribe();   //callback is subscribe
+    this.adressService.deleteEntry(entry).subscribe();   // callback is subscribe
   }
 
   editEntry(entry: Entry): void {
-    let dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '280px',
       data: { entry: entry }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.adressService.updateEntry(result).subscribe(result => this.openSnackBar("Eintrag aktualisiert"))
+        this.adressService.updateEntry(result).subscribe(data => this.openSnackBar('Eintrag aktualisiert'));
         console.log('edit result');
       }
     }, err => {
-      this.openSnackBar("Server-Fehler");
+      this.openSnackBar('Server-Fehler');
     });
   }
 
   openConfirmDialog(entry: Entry): void {
-    let dialogRef = this.dialog.open(ConfirmDialogComponent, {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px'
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.deleteEntry(entry);
-        this.openSnackBar("Eintrag entfernt");
+        this.openSnackBar('Eintrag entfernt');
 
       }
     }, err => {
-      this.openSnackBar("Server-Fehler");
+      this.openSnackBar('Server-Fehler');
     });
   }
 
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(DialogComponent, {
+    const dialogRef = this.dialog.open(DialogComponent, {
       width: '250px',
       data: { selectedEntry: this.selectedEntry }
     });
@@ -128,21 +128,21 @@ export class adressEntriesComponent implements OnInit {
         this.adressService.addEntry(result)    // as Entry
           .subscribe(entry => {
             this.entries.push(entry);
-            this.openSnackBar("Eintrag hinzugefügt");
+            this.openSnackBar('Eintrag hinzugefügt');
           });
       }
     });
   }
 
-  search(): void {  //search: string
-    this.searchTerms.next(this.searchBar);  //term
+  search(): void {  // search: string
+    this.searchTerms.next(this.searchBar);  // term
   }
 
   openSnackBar(msg: string) {
     // this.snackBar.openFromComponent(SnackbarComponent, {
     //   duration: 500,
     // });
-    let config = new MatSnackBarConfig();
+    const config = new MatSnackBarConfig();
     config.duration = 1000;
     this.snackBar.open(msg, null, config);
   }

@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { adressEntriesComponent } from './entries/adress-entry.component';
+import { AdressEntriesComponent } from './entries/adress-entry.component';
 import { AdressManagementService } from './adress.service';
-import { EntryPipe } from './entries.pipe'
+import { EntryPipe } from './entries.pipe';
 import { AdressDetailComponent } from './adress-detail/adress-detail.component';
 import { DialogComponent } from './dialog/dialog.component';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
@@ -14,7 +14,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   MatButtonModule, MatCheckboxModule, MatInputModule, MatDatepickerModule, MatNativeDateModule,
   MatPaginatorModule, MatIconModule, MatFormFieldModule, MatCardModule,
-  MatToolbarModule, MatSnackBarModule, MatMenuModule, MatAutocompleteModule, MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule
+  MatToolbarModule, MatSnackBarModule, MatMenuModule, MatAutocompleteModule, MatStepperModule,
+  MatProgressSpinnerModule, MatSidenavModule, MatListModule
 } from '@angular/material';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -27,7 +28,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
-    AppComponent, adressEntriesComponent, EntryPipe, AdressDetailComponent, DialogComponent, ConfirmDialogComponent, SnackbarComponent, LoginComponent, RegistrationComponent, NavbarComponent
+    AppComponent, AdressEntriesComponent, EntryPipe, AdressDetailComponent, DialogComponent, ConfirmDialogComponent, SnackbarComponent,
+    LoginComponent, RegistrationComponent, NavbarComponent
   ],
   imports: [
     BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,

@@ -20,31 +20,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  entry: Entry;
 
   constructor(public dialogRef: MatDialogRef<DialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: any, public snackBar: MatSnackBar) {
   }
-
-  onNoClick(): void {
-    this.dialogRef.close();
-  }
-
-  openSnackBar() {
-    let config = new MatSnackBarConfig();
-    config.duration = 1000;
-    this.snackBar.open("Bitte geforderte Felder angeben", null, config);
-  }
-
-  addEntry(): void {
-    if (this.entry.email && this.entry.name && this.entry.forename) {
-      this.dialogRef.close(this.entry);
-    }
-    else {
-      this.openSnackBar();
-    }
-
-  }
+  entry: Entry;
 
 
   emailFormControl = new FormControl('', [
@@ -52,9 +32,28 @@ export class DialogComponent implements OnInit {
     Validators.email,
   ]);
 
-  //setValue() { this.emailFormControl.setValue('new value'); }
+  // setValue() { this.emailFormControl.setValue('new value'); }
 
   matcher = new MyErrorStateMatcher();
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+  openSnackBar() {
+    const config = new MatSnackBarConfig();
+    config.duration = 1000;
+    this.snackBar.open('Bitte geforderte Felder angeben', null, config);
+  }
+
+  addEntry(): void {
+    if (this.entry.email && this.entry.name && this.entry.forename) {
+      this.dialogRef.close(this.entry);
+    } else {
+      this.openSnackBar();
+    }
+
+  }
 
 
   ngOnInit() {
