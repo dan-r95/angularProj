@@ -12,6 +12,7 @@ This project represents a digital adressbook which displays contacts set by the 
 * Run `mvn -v` to ensure that maven is correctly installed and added to the `PATH` variable.
 * Run `npm -v` to ensure that node package manager is correctly installed.
 * Run `npm install` from the `web`` subdirectory to install the required packages.
+* Run `npm i -g npm-check-updates ncu -u npm install` to update all out of date packages.
 
 # Dev
 
