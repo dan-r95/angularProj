@@ -19,17 +19,20 @@
       </mat-autocomplete>
     </form>
 
-    <div class="row">
-      <div class="col-md-3 col-xs-6 col-sm-6 adressBox" *ngFor="let entry of entries  | slice:pageIndex*pageSize : (pageIndex+1)*pageSize">
+    <div class="row" cdkDropList>
+      <div cdkDrag (cdkDropListDropped)="drop($event)" class="col-md-3 col-xs-6 col-sm-6 adressBox" *ngFor="let entry of entries  | slice:pageIndex*pageSize : (pageIndex+1)*pageSize">
         <!-- searchFilter:searchBar | slice:0:2 -->
-        <div class="topDiv" routerLink="/adressDetail/{{entry.id}}">
+          <!-- All lists in here will be connected. -->
+          <div  class="topDiv" routerLink="/adressDetail/{{entry.id}}">
           <h5>{{entry.forename | slice:0:8}} {{entry.forename.length > 8 ? '...':''}} </h5>
           <h4>{{entry.name | slice:0:8 }} {{entry.name.length > 8 ? '...':''}} </h4>
           <div *ngIf="entry.mobile">
             <mat-icon>smartphone</mat-icon>
             {{entry.mobile}}
           </div>
+          <!--<img   *cdkDragPreview [src]="'../../assets/default_pic.jpg'" />-->
         </div>
+
 
         <div class="downDiv" class="action-buttons">
           <!-- <mat-card-actions> -->

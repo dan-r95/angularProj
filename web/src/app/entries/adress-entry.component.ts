@@ -10,6 +10,7 @@ import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
 import { FormControl } from '@angular/forms';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-adress-entry',
@@ -132,6 +133,10 @@ export class AdressEntriesComponent implements OnInit {
           });
       }
     });
+  }
+
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.entries, event.previousIndex, event.currentIndex);
   }
 
   search(): void {  // search: string

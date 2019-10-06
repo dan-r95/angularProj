@@ -18,6 +18,8 @@ import {
   MatProgressSpinnerModule, MatSidenavModule, MatListModule
 } from '@angular/material';
 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './/app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -36,7 +38,8 @@ import { NavbarComponent } from './navbar/navbar.component';
     BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
     AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
     MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule,
-    MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule
+    MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule,
+     MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule
   ],
   providers: [AdressManagementService],
   bootstrap: [AppComponent],
