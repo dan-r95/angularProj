@@ -21,10 +21,10 @@ export class RegistrationComponent implements OnInit {
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-    emailFormControl = new FormControl('', [
-      Validators.required,
-      Validators.email,
-    ]);
+  emailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
 
   matcher = new MyErrorStateMatcher();
 
@@ -35,19 +35,19 @@ export class RegistrationComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-}
-    onSave(): void {
-      this.router.navigate(['adresses']);
+  }
+  onSave(): void {
+    this.router.navigate(['adresses']);
+  }
+
+  onDiscard(): void {
+    //  this.location.go("/adresses")
+  }
+
+  validate(): void {
+    if (!this.secondFormGroup.valid) {
+      console.log('Not valid');
     }
 
-    onDiscard(): void {
-      //  this.location.go("/adresses")
-    }
-
-    validate(): void {
-        if (!this.secondFormGroup.valid) {
-  console.log('Not valid');
-}
-
-    }
+  }
 }

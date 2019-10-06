@@ -1,8 +1,9 @@
-import { Component, ChangeDetectorRef, OnInit, ViewChildren, OnDestroy } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, ViewChildren, OnDestroy, ViewChild } from '@angular/core';
 
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup } from '@angular/forms';
-
+import { MatSidenav } from '@angular/material';
+import { SidenavService } from '../navigation.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,7 +12,9 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, fb: FormBuilder) {
+  @ViewChild('snav', { static: false }) public snav: MatSidenav;
+
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, fb: FormBuilder, private navigationService: SidenavService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -24,6 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   @ViewChildren('#sidenav') sidenav: any;
   options: FormGroup;
 
+  color = '#fff'
 
   opened: boolean;
   mobileQuery: MediaQueryList;
@@ -32,9 +36,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   }
-  toggleNav(): void {
-    console.log(this.sidenav);
-    // this.sidenav.toggle();
+
+  public toggleSidenav() {
+    this.navigationService
+      .toggle()
+      .then(() => { });
   }
 
   ngOnDestroy(): void {

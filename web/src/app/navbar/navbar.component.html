@@ -1,31 +1,18 @@
-<div>
   <mat-toolbar color="primary">
-    <span><nav>
-    <a routerLink="/adresses"><mat-icon class="header-link">home</mat-icon></a>
-  </nav></span>
+    <span>
+      <nav>
+        <a routerLink="/adresses">
+          <mat-icon class="header-link">home</mat-icon>
+        </a>
+      </nav>
+    </span>
     <span class="example-spacer"></span>
-    <span><mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
-  </mat-progress-spinner></span>
-    <span> <a class="header-link" [href]="angularDocsUrl">Github</a> </span>
-    <span><button mat-icon-button (click)="sidenav.toggle()">
-  <mat-icon>menu</mat-icon>
-  </button></span>
+    <span *ngIf = "loading">
+      <mat-progress-spinner class="example-margin" [color]="color" [mode]="mode" [value]="value">
+      </mat-progress-spinner>
+    </span>
+    <span><button mat-icon-button (click)="toggleSidenav()">
+        <mat-icon>menu</mat-icon>
+      </button></span>
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-container" *ngIf="shouldRun" autosize>
-    <mat-sidenav #sidenav mode="side" [(opened)]="opened" (opened)="events.push('open!')" (closed)="events.push('close!')">
-      <mat-nav-list>
-
-
-        <!-- <mat-sidenav-content> -->
-        <button mat-menu-item (click)="openConfirmDialog()">
-    <mat-icon>cached</mat-icon>
-    <span>Reset</span>
-    </button>
-      </mat-nav-list>
-      <!-- </mat-sidenav-content> -->
-    </mat-sidenav>
-
-    <mat-sidenav-content> ...</mat-sidenav-content>
-  </mat-sidenav-container>
-</div>

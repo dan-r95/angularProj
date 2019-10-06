@@ -1,35 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 
 import { AdressManagementService } from './adress.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
-import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatDialog, MatSnackBar, MatSnackBarConfig, MatSidenav } from '@angular/material';
 import { Location } from '@angular/common';
-
-
-
-
-
+import { SidenavService } from './navigation.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   color = 'accent';
   mode = 'indeterminate';
   value = 50;
 
-  angularDocsUrl = 'https://github.com/rossy95/angularProj';
+  angularDocsUrl = 'https://github.com/dan-r95/angularProj';
 
-
+  @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
 
   constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar,
-    private location: Location, ) {
+    private location: Location, private sidenavService: SidenavService) {
 
   }
 
+  public ngOnInit(): void {
+    // Store sidenav to service
+    this.sidenavService
+      .setSidenav(this.sidenav);
+  }
 
   deleteAll(): void {
     this.adressService.deleteAll().subscribe();
@@ -48,6 +49,11 @@ export class AppComponent {
 
     });
 
+  }
+
+
+  openGit() {
+    window.open(this.angularDocsUrl, '_blank');
   }
 
   openSnackBar(msg: string) {

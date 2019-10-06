@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {Location} from '@angular/common';
-import {MatDialog, MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
+import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
-import {Entry} from '../entry';
-import {AdressManagementService} from '../adress.service';
-import {DialogComponent} from '../dialog/dialog.component';
-import {ConfirmDialogComponent} from '../confirm-dialog/confirm-dialog.component';
+import { Entry } from '../entry';
+import { AdressManagementService } from '../adress.service';
+import { DialogComponent } from '../dialog/dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -18,7 +18,7 @@ export class AdressDetailComponent implements OnInit {
   entry: Entry;
 
   constructor(private route: ActivatedRoute, private adressService: AdressManagementService,
-              private location: Location, public dialog: MatDialog, public snackBar: MatSnackBar) {
+    private location: Location, public dialog: MatDialog, public snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -49,18 +49,18 @@ export class AdressDetailComponent implements OnInit {
   editEntry(entry: Entry): void {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '280px',
-      data: {entry: entry}
+      data: { entry: entry }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         console.log('edit - result');
         console.log(result);
         this.adressService.updateEntry(result).subscribe(data => {
-            if (data) {
-              console.log('edit result');
-              this.openSnackBar('Eintrag aktualisiert');
-            }
+          if (data) {
+            console.log('edit result');
+            this.openSnackBar('Eintrag aktualisiert');
           }
+        }
         );
 
       }

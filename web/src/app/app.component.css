@@ -29,3 +29,12 @@ h1.example-app-name {
      `<body>` to be our scrolling element for mobile layouts. */
   flex: 1 0 auto;
 }
+
+
+.hiddenSpace:after {
+  content: '\200b';
+  height: 10%;
+  width: 100%;
+  min-height: 1px;
+  display: inline-block;
+}

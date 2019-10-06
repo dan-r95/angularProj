@@ -20,7 +20,6 @@ public class ContactsResource {
         return "Got it!";
     }
 
-
     /**
      * method to return all contacts either from DB or cached
      *
@@ -53,7 +52,6 @@ public class ContactsResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getContact(@PathParam("id") Integer id) {
 
-
         Contact contact = ContactManager.getInstance().getContact(id);
         if (contact != null) {
             return contact.toJsonString();
@@ -66,15 +64,15 @@ public class ContactsResource {
     @POST
     @Path("add")
     @Produces(MediaType.APPLICATION_JSON)
-    public String addContact(@FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
+    public String addContact(@FormParam("name") String name, @FormParam("forename") String forename,
+            @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile,
+            @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
 
         JSONObject json = new JSONObject();
         if (name != null && forename != null && email != null) {
             Contact contact = new Contact(null, forename, name, email, mobile, work, adress, town, zip);
 
-
             Integer completed = ContactManager.getInstance().addContact(contact);
-
 
             if (completed > -1) {
                 ContactManager.getInstance().refreshCache();
@@ -90,15 +88,16 @@ public class ContactsResource {
     @PUT
     @Path("edit")
     @Produces(MediaType.APPLICATION_JSON)
-    public String editContact(@FormParam("id") Integer id, @FormParam("name") String name, @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work, @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town, @FormParam("zip") String zip) {
+    public String editContact(@FormParam("id") Integer id, @FormParam("name") String name,
+            @FormParam("forename") String forename, @FormParam("email") String email, @FormParam("work") String work,
+            @FormParam("mobile") String mobile, @FormParam("adress") String adress, @FormParam("town") String town,
+            @FormParam("zip") String zip) {
 
         JSONObject json = new JSONObject();
         if (name != null && forename != null && email != null && id != null) {
             Contact contact = new Contact(id, forename, name, email, mobile, work, adress, town, zip);
 
-
             boolean completed = ContactManager.getInstance().updateContact(contact);
-
 
             if (completed) {
                 return contact.toJsonString();

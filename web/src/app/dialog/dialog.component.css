@@ -1,4 +1,3 @@
-
 .example-form {
   min-width: 150px;
   max-width: 500px;
@@ -17,11 +16,12 @@
 /* hide up and down button on number input fields */
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+  -webkit-appearance: none;
+  margin: 0;
 }
+
 input[type="number"] {
-    -moz-appearance: textfield;
+  -moz-appearance: textfield;
 }
 
 h4 {

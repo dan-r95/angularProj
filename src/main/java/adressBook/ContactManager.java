@@ -36,20 +36,18 @@ public class ContactManager {
         return null;
     }
 
-
     public Collection<Contact> getAllContacts() {
         if (cachedContacts != null) {
-            return cachedContacts.values();  //(Contact[]) .toArray();
+            return cachedContacts.values(); // (Contact[]) .toArray();
 
         } else {
             cachedContacts = DatabaseManager.getInstance().tryDBConnection();
             if (cachedContacts != null) {
-                return cachedContacts.values();  // (Contact[]) .toArray();
+                return cachedContacts.values(); // (Contact[]) .toArray();
             }
         }
         return null;
     }
-
 
     public boolean refreshCache() {
         cachedContacts = DatabaseManager.getInstance().tryDBConnection();
@@ -64,7 +62,6 @@ public class ContactManager {
         cachedContacts = DatabaseManager.getInstance().tryDBConnection();
         return completed;
     }
-
 
     public boolean updateContact(Contact contact) {
         boolean completed = DatabaseManager.getInstance().updateEntry(contact);
@@ -94,8 +91,9 @@ public class ContactManager {
         // just search the cache, not the DB
         if (cachedContacts != null) {
             final String searchString = ss.toLowerCase();
-            Stream<Contact> stream = cachedContacts.values().stream().filter(e -> e.getName().toLowerCase().contains(searchString) ||
-                    e.getForename().toLowerCase().contains(searchString));
+            Stream<Contact> stream = cachedContacts.values().stream()
+                    .filter(e -> e.getName().toLowerCase().contains(searchString)
+                            || e.getForename().toLowerCase().contains(searchString));
             List<Contact> list = stream.collect(Collectors.toList());
             return list;
 

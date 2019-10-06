@@ -1,17 +1,34 @@
-<!-- <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="openConfirmDialog()">
-        <mat-icon>cached</mat-icon>
-        <span >Reset</span>
-      </button>
-    </mat-menu> -->
 <div style="text-align:center">
+  <mat-sidenav-container>
+    <mat-sidenav #sidenav mode="over" position="end" [(opened)]="opened">
+
+      <mat-nav-list>
+
+        <button mat-menu-item (click)="openConfirmDialog()">
+          <mat-icon>cached</mat-icon>
+          <span>Reset</span>
+        </button>
+        <button mat-menu-item (click)="openGit()">
+          <mat-icon>Github</mat-icon>
+          <span>Github</span>
+        </button>
+      </mat-nav-list>
+
+    </mat-sidenav>
 
 
-  <app-navbar></app-navbar>
+    <mat-sidenav-content>
+      <app-navbar></app-navbar>
 
-  <h2>
-  Mein Adressbuch
-  </h2>
+      <div class="hiddenSpace"></div>
+      <h2>
+        Mein Adressbuch
+      </h2>
 
-  <router-outlet></router-outlet>
+
+
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
 </div>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import 'hammerjs';
 
 import { AppComponent } from './app.component';
 import { AdressEntriesComponent } from './entries/adress-entry.component';
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { SidenavService } from './navigation.service';
 
 
 @NgModule({
@@ -39,9 +41,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
     MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule,
     MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule,
-     MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule
+    MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule
   ],
-  providers: [AdressManagementService],
+  providers: [AdressManagementService, SidenavService],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent, ConfirmDialogComponent, SnackbarComponent]
 })

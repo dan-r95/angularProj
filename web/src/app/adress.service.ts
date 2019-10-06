@@ -1,21 +1,21 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 
-import {Observable, of} from 'rxjs';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {catchError, map, tap} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
 
-import {Entry} from './entry';
+import { Entry } from './entry';
 
 // request body options
 const bodyOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/x-www-form-urlencoded'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' })
 };
 
 const httpOptions = {
-  headers: new HttpHeaders({'Content-Type': 'application/json'})
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-import {PageEvent} from '@angular/material';
+import { PageEvent } from '@angular/material';
 
 @Injectable()
 export class AdressManagementService {

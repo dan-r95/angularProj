@@ -16,7 +16,8 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(Integer id, String forename, String name, String email, String mobile, String work, String adress, String town, String zip) {
+    public Contact(Integer id, String forename, String name, String email, String mobile, String work, String adress,
+            String town, String zip) {
         setId(id);
         setForename(forename);
         setName(name);

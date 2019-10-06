@@ -5,14 +5,12 @@ import java.util.HashMap;
 
 public class DatabaseManager {
 
-
     static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
     static final String DB_URL = "jdbc:mysql://localhost/contacts";
 
-    //  Database credentials
+    // Database credentials
     static final String USER = "root";
     static final String PASS = "";
-
 
     private static final DatabaseManager instance = new DatabaseManager();
 
@@ -23,22 +21,22 @@ public class DatabaseManager {
     private DatabaseManager() {
     }
 
-
     public HashMap<Integer, Contact> tryDBConnection() {
 
-   //FIXME should replace some of the redundant connection code, switch sql statements ...
+        // FIXME should replace some of the redundant connection code, switch sql
+        // statements ...
 
         Connection conn = null;
         Statement stmt = null;
         try {
-            //STEP 2: Register JDBC driver
+            // STEP 2: Register JDBC driver
             Class.forName("com.mysql.jdbc.Driver");
 
-            //STEP 3: Open a connection
+            // STEP 3: Open a connection
             System.out.println("Connecting to database...");
             conn = DriverManager.getConnection(DB_URL, USER, PASS);
 
-            //STEP 4: Execute a query
+            // STEP 4: Execute a query
             System.out.println("Creating statement...");
             stmt = conn.createStatement();
             String sql;
@@ -47,7 +45,7 @@ public class DatabaseManager {
 
             HashMap<Integer, Contact> contactsById = new HashMap<>();
 
-            //STEP 5: Extract data from result set
+            // STEP 5: Extract data from result set
             while (rs.next()) {
                 int id = rs.getInt("id");
                 String forename = rs.getString("forename");
@@ -63,31 +61,31 @@ public class DatabaseManager {
                 contactsById.put(contact.getId(), contact);
 
             }
-            //STEP 6: Clean-up environment
+            // STEP 6: Clean-up environment
             rs.close();
             stmt.close();
             conn.close();
             System.out.println("Goodbye! success");
             return contactsById;
         } catch (SQLException se) {
-            //Handle errors for JDBC
+            // Handle errors for JDBC
             se.printStackTrace();
         } catch (Exception e) {
-            //Handle errors for Class.forName
+            // Handle errors for Class.forName
             e.printStackTrace();
         } finally {
-            //finally block used to close resources
+            // finally block used to close resources
             try {
                 if (stmt != null)
                     stmt.close();
             } catch (SQLException se2) {
-            }// nothing we can do
+            } // nothing we can do
             try {
                 if (conn != null)
                     conn.close();
             } catch (SQLException se) {
                 se.printStackTrace();
-            }//end finally try
+            } // end finally try
         }
         System.out.println("Goodbye!");
         return null;
@@ -116,8 +114,9 @@ public class DatabaseManager {
             String sql;
 
             PreparedStatement sqlStatement;
-            sqlStatement = conn.prepareStatement("insert into contacts (name, forename, email, mobile, work, adress, town, zip) " +
-                    "values(?, ?, ?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            sqlStatement = conn
+                    .prepareStatement("insert into contacts (name, forename, email, mobile, work, adress, town, zip) "
+                            + "values(?, ?, ?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             sqlStatement.setString(1, name);
             sqlStatement.setString(2, forename);
             sqlStatement.setString(3, email);
@@ -181,8 +180,9 @@ public class DatabaseManager {
             String sql;
 
             PreparedStatement sqlStatement;
-            sqlStatement = conn.prepareStatement("UPDATE contacts SET  forename= ?, name = ?, email=?, mobile=?, work=?, adress=?, town=?, zip=?  " +
-                    "WHERE id = ?;");
+            sqlStatement = conn.prepareStatement(
+                    "UPDATE contacts SET  forename= ?, name = ?, email=?, mobile=?, work=?, adress=?, town=?, zip=?  "
+                            + "WHERE id = ?;");
             sqlStatement.setString(1, forename);
             sqlStatement.setString(2, name);
             sqlStatement.setString(3, email);
@@ -241,7 +241,6 @@ public class DatabaseManager {
                 PreparedStatement sqlStatement;
                 sqlStatement = conn.prepareStatement("DELETE FROM contacts WHERE id = ?");
                 sqlStatement.setInt(1, Id);
-
 
                 System.out.print(sqlStatement.toString());
                 Integer rs2 = sqlStatement.executeUpdate();
