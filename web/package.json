@@ -22,7 +22,7 @@
     "@angular/platform-browser": "^9.1.1",
     "@angular/platform-browser-dynamic": "^9.1.1",
     "@angular/router": "^9.1.1",
-    "@hapi/hoek": "^7.2.1",
+    "@hapi/hoek": "^9.0.4",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.9",
     "font-awesome": "^4.7.0",
@@ -48,15 +48,15 @@
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "^4.3.0",
+    "karma": "^5.0.1",
     "karma-chrome-launcher": "~2.2.0",
     "karma-cli": "~2.0.0",
     "karma-coverage-istanbul-reporter": "^2.1.0",
-    "karma-jasmine": "^2.0.1",
+    "karma-jasmine": "^3.1.1",
     "karma-jasmine-html-reporter": "^1.4.2",
     "protractor": "^5.4.2",
     "ts-node": "^8.4.1",
-    "tslint": "^5.20.0",
+    "tslint": "^6.1.1",
     "typescript": "^3.5.3"
   }
 }
