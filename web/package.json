@@ -18,13 +18,11 @@
     "@angular/compiler": "^8.2.14",
     "@angular/core": "^8.2.14",
     "@angular/forms": "^8.2.14",
-    "@angular/http": "^7.2.15",
     "@angular/material": "^8.2.2",
     "@angular/platform-browser": "^8.2.14",
     "@angular/platform-browser-dynamic": "^8.2.14",
     "@angular/router": "^8.2.14",
     "@hapi/hoek": "^7.2.1",
-    "angular-in-memory-web-api": "^0.8.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.9",
     "font-awesome": "^4.7.0",
@@ -40,7 +38,6 @@
     "tslib": "^1.10.0"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.800.6",
     "@angular/cli": "^8.3.26",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "^8.2.14",
