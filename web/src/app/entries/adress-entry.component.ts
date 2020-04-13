@@ -153,5 +153,4 @@ export class AdressEntriesComponent implements OnInit {
     config.duration = 1000;
     this.snackBar.open(msg, null, config);
   }
-
 }

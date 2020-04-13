@@ -29,6 +29,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   color = '#fff'
 
+  loading: boolean;
+
   opened: boolean;
   mobileQuery: MediaQueryList;
 

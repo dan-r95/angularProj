@@ -19,6 +19,8 @@ export class AppComponent implements OnInit {
   mode = 'indeterminate';
   value = 50;
 
+  opened: boolean;
+
   angularDocsUrl = 'https://github.com/dan-r95/angularProj';
 
   @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;

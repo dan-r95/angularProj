@@ -10,7 +10,7 @@
 
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' id="searchField" (keyup)="search()" [formControl]="autoControl" [matAutocomplete]="searchResults" />
+        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' id="searchField" (keyup)="search()" [matAutocomplete]="searchResults" />
       </mat-form-field>
       <mat-autocomplete #searchResults="matAutocomplete">
         <mat-option *ngFor="let entry of entries$ | async" [value]="option" routerLink="/adressDetail/{{entry.id}}">
