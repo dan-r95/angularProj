@@ -3,7 +3,9 @@ import { Component, ViewChild, OnInit } from '@angular/core';
 import { AdressManagementService } from './adress.service';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
-import { MatDialog, MatSnackBar, MatSnackBarConfig, MatSidenav } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSidenav } from '@angular/material/sidenav';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Location } from '@angular/common';
 import { SidenavService } from './navigation.service';
 

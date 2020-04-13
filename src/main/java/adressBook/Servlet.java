@@ -14,7 +14,7 @@ import java.util.Optional;
  */
 public class Servlet {
     // Base URI the Grizzly HTTP server will listen on
-    public static final String BASE_URI = "http://localhost:8080/api/";
+    public static final String BASE_URI = "http://localhost:8081/api/";
 
     /**
      * Starts Grizzly HTTP server exposing JAX-RS resources defined in this

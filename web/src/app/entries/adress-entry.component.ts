@@ -4,7 +4,9 @@ import { AdressManagementService } from '../adress.service';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
-import { MatDialog, PageEvent, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap

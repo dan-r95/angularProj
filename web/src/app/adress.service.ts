@@ -15,7 +15,7 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
-import { PageEvent } from '@angular/material';
+import { PageEvent } from '@angular/material/paginator';
 
 @Injectable()
 export class AdressManagementService {

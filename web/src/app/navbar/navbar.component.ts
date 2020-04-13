@@ -2,7 +2,7 @@ import { Component, ChangeDetectorRef, OnInit, ViewChildren, OnDestroy, ViewChil
 
 import { MediaMatcher } from '@angular/cdk/layout';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../navigation.service';
 
 @Component({

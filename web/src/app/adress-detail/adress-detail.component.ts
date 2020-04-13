@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
 
 import { Entry } from '../entry';
 import { AdressManagementService } from '../adress.service';
