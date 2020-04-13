@@ -12,7 +12,7 @@ import { SidenavService } from '../navigation.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
-  @ViewChild('snav', { static: false }) public snav: MatSidenav;
+  @ViewChild('snav') public snav: MatSidenav;
 
   constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, fb: FormBuilder, private navigationService: SidenavService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
