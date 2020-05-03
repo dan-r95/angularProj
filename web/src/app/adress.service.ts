@@ -49,7 +49,7 @@ export class AdressManagementService {
    */
   getEntry(id: number): Observable<Entry> {
     const url = `${this.adressesUrl}/${id}`;
-    console.log('getEnty' + id);
+    console.log('getEntry' + id);
     return this.http.get<Entry>(url).pipe(
       catchError(this.handleError<Entry>(`getEntry id=${id}`))
     );

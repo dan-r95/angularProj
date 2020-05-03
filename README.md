@@ -2,7 +2,8 @@
 
  <img src="web/src/assets/localhost_4200_adressDetail_26.png" alt="Interface" style="width: 600px;"/>
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
+Angular adress book, usable as a progressive web app (PWA) and hosted on github pages.
+
 
 This project represents a digital adressbook which displays contacts set by the user. The user can add contacts and delete or edit existing ones. A useful search interface makes it easy to find an entry the user is looking for. A method can delete all contacts.
 
