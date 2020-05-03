@@ -1,0 +1,92 @@
+{
+  "configVersion": 1,
+  "timestamp": 1588548598781,
+  "index": "/angularProj/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "urls": [
+        "/angularProj/favicon.ico",
+        "/angularProj/index.html",
+        "/angularProj/main.5b3201f9bd766de232f8.js",
+        "/angularProj/manifest.webmanifest",
+        "/angularProj/polyfills-es5.feb17a202445942c31e5.js",
+        "/angularProj/polyfills.954b77603f6954a740e7.js",
+        "/angularProj/runtime.7d7e9038a1cdbceb3d53.js",
+        "/angularProj/styles.074fd4f0bf3f9c31af77.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "urls": [
+        "/angularProj/assets/default_pic.jpg",
+        "/angularProj/assets/icons/icon-128x128.png",
+        "/angularProj/assets/icons/icon-144x144.png",
+        "/angularProj/assets/icons/icon-152x152.png",
+        "/angularProj/assets/icons/icon-192x192.png",
+        "/angularProj/assets/icons/icon-384x384.png",
+        "/angularProj/assets/icons/icon-512x512.png",
+        "/angularProj/assets/icons/icon-72x72.png",
+        "/angularProj/assets/icons/icon-96x96.png",
+        "/angularProj/assets/localhost_4200_adressDetail_26.png",
+        "/angularProj/default_pic.7adf90a59791878242fe.jpg",
+        "/angularProj/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
+        "/angularProj/fontawesome-webfont.20fd1704ea223900efa9.woff2",
+        "/angularProj/fontawesome-webfont.8b43027f47b20503057d.eot",
+        "/angularProj/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
+        "/angularProj/fontawesome-webfont.f691f37e57f04c152e23.woff"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/angularProj/assets/default_pic.jpg": "206ab0092f25f34e451df8496538ceb075a74afb",
+    "/angularProj/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
+    "/angularProj/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
+    "/angularProj/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
+    "/angularProj/assets/icons/icon-192x192.png": "1abd80d431a237a853ce38147d8c63752f10933b",
+    "/angularProj/assets/icons/icon-384x384.png": "329749cd6393768d3131ed6304c136b1ca05f2fd",
+    "/angularProj/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
+    "/angularProj/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
+    "/angularProj/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "/angularProj/assets/localhost_4200_adressDetail_26.png": "3792909da3dd8c8926aaa74c5adfb9a7463cd7d3",
+    "/angularProj/default_pic.7adf90a59791878242fe.jpg": "206ab0092f25f34e451df8496538ceb075a74afb",
+    "/angularProj/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
+    "/angularProj/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf": "13b1eab65a983c7a73bc7997c479d66943f7c6cb",
+    "/angularProj/fontawesome-webfont.20fd1704ea223900efa9.woff2": "d6f48cba7d076fb6f2fd6ba993a75b9dc1ecbf0c",
+    "/angularProj/fontawesome-webfont.8b43027f47b20503057d.eot": "d980c2ce873dc43af460d4d572d441304499f400",
+    "/angularProj/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg": "98a8aa5cf7d62c2eff5f07ede8d844b874ef06ed",
+    "/angularProj/fontawesome-webfont.f691f37e57f04c152e23.woff": "28b782240b3e76db824e12c02754a9731a167527",
+    "/angularProj/index.html": "80de28752e18f1e27a24a914e2fde24bd6703d54",
+    "/angularProj/main.5b3201f9bd766de232f8.js": "d64d4ec6672e29e2b4e8adeec231826cc087f74d",
+    "/angularProj/manifest.webmanifest": "f0d524d2ae8d9f5effbc849ff853ee8d54ad6a7f",
+    "/angularProj/polyfills-es5.feb17a202445942c31e5.js": "a9308fabf248986b14d88346887a6661f4124aa6",
+    "/angularProj/polyfills.954b77603f6954a740e7.js": "d6696fb059ed9be67590a2704b5402e9508dfe4d",
+    "/angularProj/runtime.7d7e9038a1cdbceb3d53.js": "a9aafcf49f49145093fc831efd9b8e2f6c71bb9c",
+    "/angularProj/styles.074fd4f0bf3f9c31af77.css": "32cf721e7c877c8b5ce9f3a7d4f084c05a0c68e8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ]
+}
