@@ -15,6 +15,10 @@ This project represents a digital adressbook which displays contacts set by the 
 * Run `npm install` from the `web`` subdirectory to install the required packages.
 * Run `npm i -g npm-check-updates ncu -u npm install` to install package updating tool.
 * Run `ncu -g` to update all out of date packages.
+
+# Deploy 
+* Run `ng deploy adress-book`.
+
 # Dev
 
 ### Frontend
