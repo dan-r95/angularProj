@@ -58,40 +58,40 @@ export class AppComponent implements OnInit {
     for (let i = 0; i < array.length; i++) {
       callback(array[i]);
     }
+  }
 
+  navigateToHome(): void {
+    this.location.back();
+  }
 
-    navigateToHome(): void {
-      this.location.back();
-    }
+  deleteAll(): void {
+    this.adressService.deleteAll().subscribe();
+  }
 
-    deleteAll(): void {
-      this.adressService.deleteAll().subscribe();
-    }
+  openConfirmDialog(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.deleteAll();
+        this.openSnackBar('Datenbank zurückgesetzt');
+        this.location.back();
+      }
 
-    openConfirmDialog(): void {
-      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-        width: '250px'
-      });
-      dialogRef.afterClosed().subscribe(result => {
-        if (result) {
-          this.deleteAll();
-          this.openSnackBar('Datenbank zurückgesetzt');
-          this.location.back();
-        }
-
-      });
-
-    }
-
-
-    openGit() {
-      window.open(this.angularDocsUrl, '_blank');
-    }
-
-    openSnackBar(msg: string) {
-      const config = new MatSnackBarConfig();
-      config.duration = 1000;
-      this.snackBar.open(msg, null, config);
-    }
+    });
 
   }
+
+
+  openGit() {
+    window.open(this.angularDocsUrl, '_blank');
+  }
+
+  openSnackBar(msg: string) {
+    const config = new MatSnackBarConfig();
+    config.duration = 1000;
+    this.snackBar.open(msg, null, config);
+  }
+
+}

@@ -28,7 +28,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { MatDialogModule } from '@angular/material/dialog';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -53,7 +53,7 @@ import { environment } from '../environments/environment';
     AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
     MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule,
     MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule,
-    MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), MatDialogModule
   ],
   providers: [AdressManagementService, SidenavService],
   bootstrap: [AppComponent],
