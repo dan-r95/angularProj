@@ -22,7 +22,7 @@ This project represents a digital adressbook which displays contacts set by the 
 # Dev
 
 ### Frontend
-Run `npm start` for a dev server from subdirectory ``web``.  Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `npm run start` for a dev server from subdirectory ``web``.  Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Backend
 Run `mvn clean compile exec:java` (inside the top directory) to run the backend.
