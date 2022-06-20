@@ -24,6 +24,7 @@ jobs:
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
+      - uses: fregante/setup-git-user@v1 
       - uses: actions/setup-node@v3
         name: Setup node 🔧
         with:
