@@ -1,40 +1,41 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from "@angular/core";
 
-import { AdressManagementService } from './adress.service';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { AdressManagementService } from "./adress.service";
+import { ConfirmDialogComponent } from "./confirm-dialog/confirm-dialog.component";
 
-import { MatDialog } from '@angular/material/dialog';
-import { MatSidenav } from '@angular/material/sidenav';
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { Location } from '@angular/common';
-import { SidenavService } from './navigation.service';
-import { Event } from '@angular/router';
+import { MatDialog } from "@angular/material/dialog";
+import { MatSidenav } from "@angular/material/sidenav";
+import { MatSnackBar, MatSnackBarConfig } from "@angular/material/snack-bar";
+import { Location } from "@angular/common";
+import { SidenavService } from "./navigation.service";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styleUrls: ["./app.component.css"],
 })
 export class AppComponent implements OnInit {
-  color = 'accent';
-  mode = 'indeterminate';
+  color = "accent";
+  mode = "indeterminate";
   value = 50;
 
   opened: boolean;
 
-  angularDocsUrl = 'https://github.com/dan-r95/angularProj';
+  angularDocsUrl = "https://github.com/dan-r95/angularProj";
 
-  @ViewChild('sidenav', { static: true }) public sidenav: MatSidenav;
+  @ViewChild("sidenav", { static: true }) public sidenav: MatSidenav;
 
-  constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar,
-    private location: Location, private sidenavService: SidenavService) {
-
-  }
+  constructor(
+    private adressService: AdressManagementService,
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    private location: Location,
+    private sidenavService: SidenavService
+  ) {}
 
   public ngOnInit(): void {
     // Store sidenav to service
-    this.sidenavService
-      .setSidenav(this.sidenav);
+    this.sidenavService.setSidenav(this.sidenav);
     // add offline functionality
     // self.addEventListener('fetch', function( event: FetchEvent) {
     //   return event.respondWith(
@@ -70,22 +71,19 @@ export class AppComponent implements OnInit {
 
   openConfirmDialog(): void {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      width: '250px'
+      width: "250px",
     });
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.deleteAll();
-        this.openSnackBar('Datenbank zurückgesetzt');
+        this.openSnackBar("Datenbank zurückgesetzt");
         this.location.back();
       }
-
     });
-
   }
 
-
   openGit() {
-    window.open(this.angularDocsUrl, '_blank');
+    window.open(this.angularDocsUrl, "_blank");
   }
 
   openSnackBar(msg: string) {
@@ -94,4 +92,10 @@ export class AppComponent implements OnInit {
     this.snackBar.open(msg, null, config);
   }
 
+  toggleDarkTheme(): void {
+    console.log("hi")
+    // read user preference
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+    document.body.classList.toggle("dark-theme", prefersDark.matches);
+  }
 }

@@ -1,4 +1,4 @@
-# AdressBook
+# AdressBook 📚
 
  <img src="web/src/assets/localhost_4200_adressDetail_26.png" alt="Interface" style="width: 600px;"/>
 

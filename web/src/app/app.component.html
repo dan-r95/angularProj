@@ -1,34 +1,35 @@
-<div style="text-align:center">
-  <mat-sidenav-container>
-    <mat-sidenav #sidenav mode="over" position="end" [(opened)]="opened">
-
+<div style="text-align: center">
+  <mat-sidenav-container class="example-sidenav-container">
+    <mat-sidenav
+      #sidenav
+      mode="over"
+      position="end"
+      [(opened)]="opened"
+      fixedTopGap="56"
+    >
       <mat-nav-list>
-
-        <button mat-menu-item (click)="openConfirmDialog()">
+        <button class="row" mat-menu-item (click)="openConfirmDialog()">
           <mat-icon>cached</mat-icon>
           <span>Reset</span>
         </button>
-        <button mat-menu-item (click)="openGit()">
+        <button class="row" mat-menu-item (click)="openGit()">
           <mat-icon>Github</mat-icon>
           <span>Github</span>
         </button>
+        <button class="row" mat-menu-item (click)="toggleDarkTheme()">
+          <mat-icon>dark_mode</mat-icon>
+          <span>Dark Mode</span>
+        </button>
       </mat-nav-list>
-
     </mat-sidenav>
-
 
     <mat-sidenav-content>
       <app-navbar></app-navbar>
 
       <div class="hiddenSpace"></div>
-      <h2>
-        Mein Adressbuch
-      </h2>
-
-
+      <h2>Mein Adressbuch</h2>
 
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
-
 </div>

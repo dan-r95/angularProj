@@ -1,59 +1,103 @@
-<div class="row">
-  <div class=' col-md-offset-4 col-md-4' style='text-align: center'>
+<div class="row" style="text-align: center">
+  <div class="col-md-offset-4 col-md-4">
     <h4>
       <mat-icon>contacts</mat-icon>
       Alle Kontakte
-      <button style="margin-left: 20px" mat-mini-fab color="primary" (click)="openDialog()">
-        <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+      <button
+        style="margin-left: 20px"
+        mat-mini-fab
+        color="primary"
+        (click)="openDialog()"
+      >
+        <mat-icon aria-label="Add button">add</mat-icon>
       </button>
     </h4>
 
     <form class="example-form">
       <mat-form-field class="example-full-width">
-        <input matInput placeholder="Browse" value="" [(ngModel)]="searchBar" name='search' id="searchField" (keyup)="search()" [matAutocomplete]="searchResults" />
+        <input
+          matInput
+          placeholder="Browse"
+          value=""
+          [(ngModel)]="searchBar"
+          name="search"
+          id="searchField"
+          (keyup)="search()"
+          [matAutocomplete]="searchResults"
+        />
+        <mat-autocomplete #searchResults="matAutocomplete">
+          <mat-option
+            *ngFor="let entry of entries$ | async"
+            [value]="option"
+            routerLink="/adressDetail/{{ entry.id }}"
+          >
+            {{ entry.forename + " " + entry.name }}
+          </mat-option>
+        </mat-autocomplete>
       </mat-form-field>
-      <mat-autocomplete #searchResults="matAutocomplete">
-        <mat-option *ngFor="let entry of entries$ | async" [value]="option" routerLink="/adressDetail/{{entry.id}}">
-          {{entry.forename + " " + entry.name}}
-        </mat-option>
-      </mat-autocomplete>
     </form>
-
-    <div class="row" cdkDropList>
-      <div cdkDrag (cdkDropListDropped)="drop($event)" class="col-md-3 col-xs-6 col-sm-6 adressBox" *ngFor="let entry of entries  | slice:pageIndex*pageSize : (pageIndex+1)*pageSize">
-        <!-- searchFilter:searchBar | slice:0:2 -->
-          <!-- All lists in here will be connected. -->
-          <div  class="topDiv" routerLink="/adressDetail/{{entry.id}}">
-          <h5>{{entry.forename | slice:0:8}} {{entry.forename.length > 8 ? '...':''}} </h5>
-          <h4>{{entry.name | slice:0:8 }} {{entry.name.length > 8 ? '...':''}} </h4>
-          <div *ngIf="entry.mobile">
-            <mat-icon>smartphone</mat-icon>
-            {{entry.mobile}}
-          </div>
-          <!--<img   *cdkDragPreview [src]="'../../assets/default_pic.jpg'" />-->
-        </div>
-
-
-        <div class="downDiv" class="action-buttons">
-          <!-- <mat-card-actions> -->
-          <button mat-mini-fab color="primary">
-            <mat-icon (click)="editEntry(entry)">edit</mat-icon>
-          </button>
-          <button mat-mini-fab color="primary">
-            <mat-icon (click)="openConfirmDialog(entry)">delete</mat-icon>
-          </button>
-        </div>
-
-      </div>
+    <div
+      *ngIf="!entries || entries.length == 0"
+      class="col-md-offset-4 col-md-4"
+    >
+      <mat-icon aria-hidden="false" aria-label="sad">
+        sentiment_very_dissatisfied</mat-icon
+      >
+      Keine Kontakte gefunden. Möchtest du einen Kontakt hinzufügen?
     </div>
-    <div *ngIf="pageEvent">
-      <h5>Page Change Event Properties</h5>
-      <div>List length: {{pageEvent.length}}</div>
-      <div>Page size: {{pageEvent.pageSize}}</div>
-      <div>Page index: {{pageEvent.pageIndex}}</div>
-    </div>
-    <mat-paginator *ngIf="entries" [length]="length" [pageSize]="5" [pageIndex]="0" [pageSizeOptions]="[5, 10, 25, 50]" (page)="pageEvent = getAllEntries($event)">
-    </mat-paginator>
-
   </div>
+</div>
+<div class="row" cdkDropList>
+  <div
+    cdkDrag
+    (cdkDropListDropped)="drop($event)"
+    class="col-md-3 col-xs-6 col-sm-6 adressBox"
+    *ngFor="
+      let entry of entries
+        | slice: pageIndex * pageSize:(pageIndex + 1) * pageSize
+    "
+  >
+    <!-- searchFilter:searchBar | slice:0:2 -->
+    <!-- All lists in here will be connected. -->
+    <div class="topDiv" routerLink="/adressDetail/{{ entry.id }}">
+      <h5>
+        {{ entry.forename | slice: 0:8 }}
+        {{ entry.forename.length > 8 ? "..." : "" }}
+      </h5>
+      <h4>
+        {{ entry.name | slice: 0:8 }} {{ entry.name.length > 8 ? "..." : "" }}
+      </h4>
+      <div *ngIf="entry.mobile">
+        <mat-icon>smartphone</mat-icon>
+        {{ entry.mobile }}
+      </div>
+      <!--<img   *cdkDragPreview [src]="'../../assets/default_pic.jpg'" />-->
+    </div>
+
+    <div class="downDiv" class="action-buttons col-md-3 col-md-offset-5">
+      <!-- <mat-card-actions> -->
+      <button mat-mini-fab color="primary">
+        <mat-icon (click)="editEntry(entry)">edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon (click)="openConfirmDialog(entry)">delete</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="pageEvent">
+    <h5>Page Change Event Properties</h5>
+    <div>List length: {{ pageEvent.length }}</div>
+    <div>Page size: {{ pageEvent.pageSize }}</div>
+    <div>Page index: {{ pageEvent.pageIndex }}</div>
+  </div>
+  <mat-paginator
+    class="col-md-4 col-md-offset-4"
+    *ngIf="entries"
+    [length]="length"
+    [pageSize]="5"
+    [pageIndex]="0"
+    [pageSizeOptions]="[5, 10, 25, 50]"
+    (page)="pageEvent = getAllEntries($event)"
+  >
+  </mat-paginator>
 </div>
