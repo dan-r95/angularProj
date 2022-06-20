@@ -25,6 +25,7 @@ jobs:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
       - uses: actions/setup-node@v3
+        name: Setup node 🔧
         with:
           node-version: 16
       - name: Get npm cache directory
@@ -33,6 +34,7 @@ jobs:
           echo "::set-output name=dir::$(npm config get cache)"   
       - uses: actions/cache@v3
         id: npm-cache
+        name: cache it
         with:
           path: ${{ steps.npm-cache-dir.outputs.dir }}
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
@@ -42,10 +44,4 @@ jobs:
         run: |
           cd web
           npm ci
-          npm run build
-
-      - name: Deploy 🚀
-        uses: JamesIves/github-pages-deploy-action@v4.3.3
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: "~/angularProj/web/build" # The folder the action should deploy.
+          ./deploy.sh
