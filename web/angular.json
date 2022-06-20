@@ -121,7 +121,6 @@
       }
     }
   },
-  "defaultProject": "adress-book",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

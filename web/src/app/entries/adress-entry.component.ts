@@ -11,7 +11,7 @@ import { Observable, Subject } from 'rxjs';
 import {
   debounceTime, distinctUntilChanged, switchMap
 } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
@@ -29,7 +29,7 @@ export class AdressEntriesComponent implements OnInit {
   length = 100;
   pageSize = 4;
   // pageSizeOptions = [5, 10, 25, 100];
-  autoControl: FormControl = new FormControl();
+  autoControl: UntypedFormControl = new UntypedFormControl();
   private searchTerms = new Subject<string>();
 
   constructor(private adressService: AdressManagementService, public dialog: MatDialog, public snackBar: MatSnackBar) {

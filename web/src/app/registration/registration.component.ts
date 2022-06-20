@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, NgForm, FormGroupDirective, FormControl } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators, NgForm, FormGroupDirective, UntypedFormControl } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
+  isErrorState(control: UntypedFormControl | null, form: FormGroupDirective | NgForm | null): boolean {
     const isSubmitted = form && form.submitted;
     return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
   }
@@ -17,11 +17,11 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-  constructor(private _formBuilder: FormBuilder, private router: Router) { }
+  constructor(private _formBuilder: UntypedFormBuilder, private router: Router) { }
 
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
-  emailFormControl = new FormControl('', [
+  firstFormGroup: UntypedFormGroup;
+  secondFormGroup: UntypedFormGroup;
+  emailFormControl = new UntypedFormControl('', [
     Validators.required,
     Validators.email,
   ]);

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, OnInit, ViewChildren, OnDestroy, ViewChild } from '@angular/core';
 
 import { MediaMatcher } from '@angular/cdk/layout';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import { SidenavService } from '../navigation.service';
 
@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   @ViewChild('snav') public snav: MatSidenav;
 
-  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, fb: FormBuilder, private navigationService: SidenavService) {
+  constructor(changeDetectorRef: ChangeDetectorRef, media: MediaMatcher, fb: UntypedFormBuilder, private navigationService: SidenavService) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
   }
   @ViewChildren('#sidenav') sidenav: any;
-  options: FormGroup;
+  options: UntypedFormGroup;
 
   color = '#fff'
 
