@@ -43,21 +43,20 @@ import { environment } from '../environments/environment';
 
 
 @NgModule({
-  declarations: [
-    AppComponent, AdressEntriesComponent, EntryPipe, AdressDetailComponent, DialogComponent, ConfirmDialogComponent, SnackbarComponent,
-    LoginComponent, RegistrationComponent, NavbarComponent
-  ],
-  imports: [
-    BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
-    BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
-    AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
-    MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule,
-    MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule,
-    MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), MatDialogModule
-  ],
-  providers: [AdressManagementService, SidenavService],
-  bootstrap: [AppComponent],
-  entryComponents: [DialogComponent, ConfirmDialogComponent, SnackbarComponent]
+    declarations: [
+        AppComponent, AdressEntriesComponent, EntryPipe, AdressDetailComponent, DialogComponent, ConfirmDialogComponent, SnackbarComponent,
+        LoginComponent, RegistrationComponent, NavbarComponent
+    ],
+    imports: [
+        BrowserModule, MatButtonModule, MatCheckboxModule, MatInputModule, FormsModule,
+        BrowserAnimationsModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule,
+        AppRoutingModule, MatIconModule, MatFormFieldModule, MatInputModule, ReactiveFormsModule,
+        MatCardModule, MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule,
+        MatStepperModule, MatProgressSpinnerModule, MatSidenavModule, MatListModule,
+        MatToolbarModule, MatSnackBarModule, HttpClientModule, MatMenuModule, MatAutocompleteModule, DragDropModule, ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }), MatDialogModule
+    ],
+    providers: [AdressManagementService, SidenavService],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }
